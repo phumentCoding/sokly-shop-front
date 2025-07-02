@@ -1,13 +1,14 @@
-import { BrowserRouter, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import FrontRoutes from "../front/router/frontRoute";
 
-const router = () => {
+const MasterRouter = () => {
     return (
         <BrowserRouter>
            <Routes>
-               
+                <Route path="/" element={<FrontRoutes/>}/>
            </Routes>
         </BrowserRouter>
     )
 }
 
-export default router;
+export default MasterRouter;
