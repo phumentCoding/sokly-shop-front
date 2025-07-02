@@ -5,7 +5,7 @@ const MasterRouter = () => {
     return (
         <BrowserRouter>
            <Routes>
-                <Route path="/" element={<FrontRoutes/>}/>
+                <Route path="/*" element={<FrontRoutes/>}/>
            </Routes>
         </BrowserRouter>
     )
