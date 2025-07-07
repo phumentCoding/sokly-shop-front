@@ -147,19 +147,26 @@ const SpecialOffer = () => {
                   <img
                     src="https://www.soklyphone.com/img/warranty.png"
                     alt="1 Year Warranty"
-                    className="w-8 h-8 object-contain"
+                    className="w-12 h-12 object-contain"
                     title="1 Year Warranty"
                   />
                 </div>
 
                 {/* Product Image */}
-                <div className="text-6xl text-center mb-4"><img src={product.image} alt={product.name} className="w-32 h-32 object-cover" /></div>
+                <div className="mb-4">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-32 h-32 object-cover block mx-auto"
+                  />
+                </div>
+
               </div>
 
               {/* Product Info */}
               <div className="p-4 relative transition-transform duration-700 ease-in-out group-hover:-translate-y-10 flex flex-col flex-grow">
                 {/* Product Name - Fixed height */}
-                <h3 className="text-sm font-medium text-gray-900 mb-3 line-clamp-2 h-10 flex text-center">
+                <h3 className="text-md font-medium text-gray-900 mb-3 line-clamp-2 h-12 flex text-center">
                   {product.name}
                 </h3>
 
