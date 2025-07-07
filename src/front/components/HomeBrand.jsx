@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect } from "react"
 import AOS from "aos"
 import "aos/dist/aos.css"
@@ -15,14 +13,14 @@ const HomeBrand = () => {
   }, [])
 
   const brands = [
-    { name: "Apple", logo: "🍎" },
-    { name: "Samsung", logo: "📱" },
-    { name: "Google", logo: "🔍" },
-    { name: "OnePlus", logo: "➕" },
-    { name: "Xiaomi", logo: "📲" },
-    { name: "Huawei", logo: "📞" },
-    { name: "OPPO", logo: "⭕" },
-    { name: "Vivo", logo: "📳" },
+    { name: "Apple", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/apple-logo-1660278979YARnJ.jpg" },
+    { name: "Samsung", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/samsung-logo-1660279193xqNqc.jpg" },
+    { name: "Google", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/google-logo-1660279566F6Mh0.jpg" },
+    { name: "OnePlus", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/oneplus-logo-1660277166nkJx7.jpg" },
+    { name: "Xiaomi", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/xiaomi-logo-1660279429OwLtj.jpg" },
+    { name: "Huawei", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/huawei-logo-1660277159Yszfi.jpg" },
+    { name: "OPPO", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/oppo-logo-16602771672ADFa.jpg" },
+    { name: "Vivo", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/vivo-logo-16602866285eomP.jpg" },
   ]
 
   return (
@@ -37,10 +35,19 @@ const HomeBrand = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6">
           {brands.map((brand, index) => (
-            <div key={index} className="group cursor-pointer" data-aos="zoom-in" data-aos-delay={index * 100}>
-              <div className="h-20 bg-white border-2 border-gray-200 hover:border-blue-200 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group-hover:scale-105 flex items-center justify-center p-4">
+            <div
+              key={index}
+              className="group cursor-pointer"
+              data-aos="zoom-in"
+              data-aos-delay={index * 100}
+            >
+              <div className="h-20 bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group-hover:scale-105 flex items-center justify-center p-4">
                 <div className="text-center">
-                  <div className="text-2xl mb-1">{brand.logo}</div>
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    className="h-8 sm:h-10 mx-auto mb-1 object-contain"
+                  />
                   <p className="text-xs font-medium text-gray-600 group-hover:text-blue-600 transition-colors">
                     {brand.name}
                   </p>
