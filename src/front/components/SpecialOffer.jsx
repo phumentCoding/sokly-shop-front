@@ -117,7 +117,7 @@ const SpecialOffer = () => {
         <div className="flex justify-between items-center mb-8" data-aos="fade-up">
           <h2 className="text-3xl font-bold text-gray-900">SPECIAL OFFER</h2>
           <button className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-2 transition-colors">
-            View all
+            View alla
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
