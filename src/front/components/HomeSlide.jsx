@@ -1,175 +1,133 @@
-"use client"
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { ArrowRight } from 'lucide-react';
+import HomeBrand from './HomeBrand';
 
-import { useEffect } from "react"
-import AOS from "aos"
-import "aos/dist/aos.css"
-import HomeBrand from "./HomeBrand"
+const productSlides = [
+  {
+    title: '🚨 ជូនដំណឹងបន្ទាន់ !! 📣"',
+    subtitle: '',
+    description:
+      'ហាងសុខលី សូមជូនដំណឹងដល់អតិថិជនទាំងអស់ឱ្យបានជ្រាប​ថា​ ហាងសុខលី យេីងខ្ញុំមានផេកផ្លូវការតែមួយគត់គឺផេក Sokly Phone Shop ដែលមានចំនួន Follower 353K✅ដោយសារមានផេក​ FACEBOOK ក្លែងក្លាយមួយចំនួន ដែលបានក្លែងបន្លំដាក់ឈ្មោះផេក sokly Phone Shop ហេីយកំពុងធ្វើការផុសផ្សព្វផ្សាយប្រូម៉ូសិនក្លែងក្លាយយ៉ាងសកម្ម​ ដេីម្បីធ្វេីការឆបោកអតិថិជន​ ក្នុងផេកក្លែងក្លាយរបស់ពួកគេ។ ',
+    image: 'https://www.soklyphone.com/storage/Advertises/2025/04-04-2025/face-page-1744167472AoQ7V.jpg',
+    button: 'សម្រាប់ព័ត៌មានបន្ថែម​!!',
+  },
+  {
+    title: 'Galaxy Z Fold 7 Galaxy AI"',
+    subtitle: '',
+    description:
+      'The Galaxy Z Fold 7 packs next-gen power in a slim foldable design, featuring a 6.5" outer and 8.2" inner 120Hz AMOLED display for smooth multitasking. With the Snapdragon 8 Elite, and Galaxy AI tools like smart writing and voice-to-text, it’s built for productivity. A 200MP camera captures every detail, while the 4,400​​mAh battery with 25W fast charging keeps you going all day.',
+    image: 'https://www.soklyphone.com/storage/Advertises/2025/07-07-2025/galaxy-z-fold7-1751884200Ja2KA.png',
+    button: 'PRE-ORDER NOW'
+  },
+  {
+    title: 'Galaxy Z Flip 7 The Fipable Phone that will impress you!',
+    subtitle: '',
+    description:
+      'Galaxy Z Flip 7 Ultra-sleek 6.7” AMOLED 120Hz display fits anywhere. Powered by Snapdragon 8 Gen 2, 8GB RAM, and 512GB storage for smooth performance.​​ Capture stunning photos with 10MP front and dual 12MP rear cameras. 3,700mAh battery with 25W fast charging keeps you powered all day. Style and power combined your perfect everyday companion.',
+    image: 'https://www.soklyphone.com/storage/Advertises/2025/07-07-2025/galaxy-z-flip-7png-1751940759HTlxM.png',
+    button: 'PRE-ORDER NOW'
+  },
+  {
+    title: 'Macbook Air 13" and 15" M4 Chip',
+    subtitle: '',
+    description:
+      'New MacBook Air M4 : Power, Performance, and Design Combined. MacBook Air M4 is Apple’s latest laptop powered by the high-performance M4 chip (10-core CPU/GPU).It features a vibrant Liquid Retina display with up to 500 nits of brightness.The 12MP FaceTime HD camera includes Center...',
+    image: 'https://www.soklyphone.com/storage/Advertises/2025/04-04-2025/macbook-air-m4-1744257378Dhhk2.png',
+    button: 'AVAILABLE NOW'
+  },
+];
+
+const promoSlides = [
+  {
+    image: 'https://www.soklyphone.com/storage/Advertises/2025/05-05-2025/hmd-skyline-5g-1-1747910745ZWiR7.png',
+  },
+  {
+    image: 'https://www.soklyphone.com/storage/Advertises/2025/05-05-2025/hmd-pulse-pro-1746086509UNGB8.png',
+  },
+];
 
 const HomeSlide = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      easing: "ease-in-out",
-      once: true,
-      offset: 100,
-    })
-  }, [])
-
-  const features = [
-    { icon: "⚡", title: "Fast Charging", desc: "Quick power-up technology" },
-    { icon: "🛡️", title: "Warranty", desc: "2-year protection plan" },
-    { icon: "🚚", title: "Free Delivery", desc: "Same day delivery available" },
-  ]
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 600,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-            {/* Left Content */}
-            <div className="space-y-8">
-              <div data-aos="fade-right">
-                <span className="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                  🔥 New Arrival
-                </span>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                  Latest
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                    {" "}
-                    Smartphones
-                  </span>
-                  <br />
-                  Just for You
-                </h1>
-              </div>
-
-              <p className="text-xl text-gray-600 leading-relaxed max-w-lg" data-aos="fade-right" data-aos-delay="200">
-                Discover the newest collection of premium smartphones with cutting-edge technology, exceptional cameras,
-                and lightning-fast performance.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4" data-aos="fade-right" data-aos-delay="400">
-                <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-2">
-                  🛒 Shop Now
-                </button>
-                <button className="border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:bg-gray-50 px-8 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2">
-                  📱 View Catalog
-                </button>
-              </div>
-
-              {/* Features */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8" data-aos="fade-up" data-aos-delay="600">
-                {features.map((feature, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center space-x-3 p-4 bg-white rounded-lg shadow-sm border border-gray-200 hover:transform hover:-translate-y-1 transition-all duration-300"
-                    data-aos="zoom-in"
-                    data-aos-delay={700 + index * 100}
-                  >
-                    <div className="text-2xl">{feature.icon}</div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 text-sm">{feature.title}</h4>
-                      <p className="text-gray-600 text-xs">{feature.desc}</p>
-                    </div>
+    <div className="py-7 px-4">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 min-h-[360px] sm:min-h-[420px]">
+        {/* Product Slider */}
+        <div className="flex-grow bg-slate-100 lg:w-1/2 w-full">
+          <Slider {...sliderSettings}>
+            {productSlides.map((item, index) => (
+              <div key={index} className="p-2 sm:p-8 h-full min-h-[360px] sm:min-h-[420px] flex">
+                <div className="flex flex-col sm:flex-row items-center w-full h-full">
+                  {/* Left */}
+                  <div className="w-full sm:w-1/2 flex flex-col justify-center gap-4 text-center sm:text-left">
+                    <h2 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-gray-900">{item.title}</h2>
+                    {item.subtitle && <h3 className="text-blue-700 font-medium text-lg">{item.subtitle}</h3>}
+                    <p className="text-gray-600 text-xs sm:text-sm md:text-[15px] leading-relaxed">{item.description}</p>
+                    <button className="inline-flex items-center gap-2 bg-blue-800 hover:bg-blue-900 text-white px-3 py-1.5 rounded font-semibold w-fit mx-auto sm:mx-0 text-xs sm:text-sm md:text-base">
+                      {item.button} <ArrowRight size={18} />
+                    </button>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Content - Product Showcase */}
-            <div className="relative flex justify-center items-center">
-              <div
-                className="relative z-10 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 shadow-2xl"
-                data-aos="fade-left"
-                data-aos-delay="300"
-              >
-                <div className="text-center space-y-6">
-                  <div className="relative mx-auto">
-                    <div
-                      className="relative w-64 h-80 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl shadow-xl mx-auto"
-                      data-aos="zoom-in"
-                      data-aos-delay="500"
-                    >
-                      <div className="absolute inset-4 bg-black rounded-2xl flex items-center justify-center">
-                        <div className="text-white text-center space-y-2">
-                          <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-2xl">
-                            📱
-                          </div>
-                          <h3 className="font-bold text-lg">Galaxy Z Fold 6</h3>
-                          <p className="text-sm text-gray-300">AI Technology</p>
-                        </div>
-                      </div>
-
-                      {/* Floating elements */}
-                      <div
-                        className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-yellow-800 font-bold"
-                        data-aos="bounce"
-                        data-aos-delay="1000"
-                      >
-                        ⭐
-                      </div>
-                      <div
-                        className="absolute -bottom-4 -left-4 w-12 h-12 bg-green-400 rounded-full flex items-center justify-center text-green-800 font-bold text-xs"
-                        data-aos="bounce"
-                        data-aos-delay="1200"
-                      >
-                        NEW
-                      </div>
-                    </div>
-
-                    <div className="text-white space-y-2 mt-6">
-                      <h3 className="text-2xl font-bold">Premium Collection</h3>
-                      <p className="text-gray-300">Starting from $999</p>
-                      <button className="bg-white text-gray-900 hover:bg-gray-100 px-6 py-2 rounded-lg font-semibold transition-colors duration-300 mt-4">
-                        Available Now
-                      </button>
-                    </div>
+                  {/* Right */}
+                  <div className="w-full sm:w-1/2 flex justify-center sm:justify-end items-center mt-4 sm:mt-0">
+                    <img src={item.image} alt={item.title} className="max-h-[200px] sm:max-h-[320px] object-contain" />
                   </div>
                 </div>
               </div>
-
-              {/* Background decorative elements */}
-              <div
-                className="absolute top-10 -right-10 w-32 h-32 bg-blue-200 rounded-full opacity-20"
-                data-aos="fade"
-                data-aos-delay="800"
-              ></div>
-              <div
-                className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-200 rounded-full opacity-20"
-                data-aos="fade"
-                data-aos-delay="1000"
-              ></div>
-            </div>
-          </div>
+            ))}
+          </Slider>
         </div>
-      </section>
 
-      {/* Popular Brands Section - Now using HomeBrand component */}
+        {/* Promo Slider (only visible on lg+) */}
+        <div className="w-full lg:w-3/12 hidden lg:flex flex-col justify-center h-[420px]">
+          <Slider {...sliderSettings}>
+            {promoSlides.map((promo, idx) => (
+              <div key={idx} className="bg-black flex flex-col justify-center items-center h-full">
+                <img
+                  src={promo.image}
+                  alt={`Promo ${idx + 1}`}
+                  className="max-h-[420px] max-w-full object-contain select-none rounded-lg"
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+
+      {/* Brands */}
       <HomeBrand />
 
-      {/* Stats Section */}
+      {/* Stats */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center text-white">
-            <div data-aos="fade-up" data-aos-delay="100">
+            <div className="data-aos-fade-up" data-aos-delay="100">
               <div className="text-4xl font-bold mb-2">50K+</div>
               <p className="text-blue-100">Happy Customers</p>
             </div>
-            <div data-aos="fade-up" data-aos-delay="200">
+            <div className="data-aos-fade-up" data-aos-delay="200">
               <div className="text-4xl font-bold mb-2">1000+</div>
               <p className="text-blue-100">Products Available</p>
             </div>
-            <div data-aos="fade-up" data-aos-delay="300">
+            <div className="data-aos-fade-up" data-aos-delay="300">
               <div className="text-4xl font-bold mb-2">24/7</div>
               <p className="text-blue-100">Customer Support</p>
             </div>
           </div>
         </div>
       </section>
-      
     </div>
-  )
-}
+  );
+};
 
-export default HomeSlide
+export default HomeSlide;
