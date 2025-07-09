@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { ChevronDown, ChevronUp, Play, ExternalLink } from "lucide-react"
 
-const Spicefication = () => {
+const Specification = () => {
   const [expandedSections, setExpandedSections] = useState({
     network: true,
     launch: false,
@@ -20,6 +20,13 @@ const Spicefication = () => {
       ...prev,
       [section]: !prev[section],
     }))
+  }
+
+  // Video functionality
+  const videoId = "Lhmycs8vTUM"
+  const handleVideoClick = () => {
+    // Open YouTube video in new tab
+    window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank")
   }
 
   const specifications = {
@@ -116,12 +123,11 @@ const Spicefication = () => {
         </div>
       </div>
 
-       {/* Specifications Section */}
+      {/* Specifications Section */}
       <div className="bg-white rounded-lg shadow-sm">
         <div className="p-6 border-b border-gray-200">
           <h2 className="text-2xl font-bold text-gray-900">SPECIFICATION</h2>
         </div>
-
         <div className="divide-y divide-gray-200">
           {Object.entries(specifications).map(([key, section]) => (
             <div key={key} className="p-6">
@@ -133,7 +139,6 @@ const Spicefication = () => {
                   <ChevronDown className="w-5 h-5 text-gray-500" />
                 )}
               </button>
-
               {expandedSections[key] && (
                 <div className="mt-4 space-y-3">
                   {section.details.map((detail, index) => (
@@ -147,8 +152,6 @@ const Spicefication = () => {
             </div>
           ))}
         </div>
-        <h1>We can not guarantee that the information on this page is 100% correct.</h1>
-        <h1><span className="font-bold">Source</span>: GSMArena</h1>
       </div>
 
       {/* Review Video Section */}
@@ -156,33 +159,40 @@ const Spicefication = () => {
         <div className="p-6 border-b border-gray-200">
           <h2 className="text-2xl font-bold text-gray-900">REVIEW VIDEO</h2>
         </div>
-
         <div className="p-6">
-          <div className="relative rounded-lg overflow-hidden bg-gray-900 group cursor-pointer">
+          <div
+            className="relative rounded-lg overflow-hidden bg-gray-900 group cursor-pointer"
+            onClick={handleVideoClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault()
+                handleVideoClick()
+              }
+            }}
+            aria-label="Play Huawei Watch 5 Review Video"
+          >
             <img
               src="https://img.youtube.com/vi/Lhmycs8vTUM/maxresdefault.jpg"
               alt="Huawei Watch 5 Review Video - X-TAP Technology"
               className="w-full h-64 md:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
             />
-
             {/* Play Button Overlay */}
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all duration-300">
               <div className="bg-white bg-opacity-90 rounded-full p-4 group-hover:bg-opacity-100 transition-all duration-300 transform group-hover:scale-110">
                 <Play className="w-8 h-8 text-gray-800 ml-1" fill="currentColor" />
               </div>
             </div>
-
             {/* Video Duration Badge */}
             <div className="absolute bottom-4 right-4 bg-black bg-opacity-75 text-white text-sm px-2 py-1 rounded">
               8:45
             </div>
-
             {/* Technology Highlight */}
             <div className="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
               X-TAP Technology
             </div>
           </div>
-
           <div className="mt-4">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Huawei Watch 5 46mm - Complete Review & X-TAP Technology Demo
@@ -194,11 +204,8 @@ const Spicefication = () => {
           </div>
         </div>
       </div>
-
-     
-
     </div>
   )
 }
 
-export default Spicefication
+export default Specification
