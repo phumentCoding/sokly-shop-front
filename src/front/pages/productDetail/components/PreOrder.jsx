@@ -103,7 +103,7 @@ const PreOrder = () => {
           >
             <Minus className="w-4 h-4" />
           </button>
-          <span className="w-12 text-center font-medium">{quantity}</span>
+          <span className="w-12 text-center font-medium">{quantity} dsfdsf</span>
           <button
             onClick={() => handleQuantityChange("increment")}
             className="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-50"
