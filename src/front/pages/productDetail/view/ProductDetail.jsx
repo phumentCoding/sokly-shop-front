@@ -15,11 +15,11 @@ const ProductDetail = () => {
   const navItems = ["Home", "Products", "Smart Watches", "Accessories", "Support", "About"]
 
   const productImages = [
-    { image: "https://via.placeholder.com/400x400", alt: "Huawei Watch 5 - Front View" },
-    { image: "https://via.placeholder.com/400x400", alt: "Huawei Watch 5 - Side View" },
-    { image: "https://via.placeholder.com/400x400", alt: "Huawei Watch 5 - Back View" },
-    { image: "https://via.placeholder.com/400x400", alt: "Huawei Watch 5 - Angle View" },
-    { image: "https://via.placeholder.com/400x400", alt: "Huawei Watch 5 - Profile View" },
+    { image: "https://soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/black-1-1751362418cBcjK.png" },
+    { image: "https://soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/titanium-strap-1-1750737202niAeD.png" },
+    { image: "https://soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/titanium-strap-2-17507372037fN6T.png", alt: "Huawei Watch 5 - Back View" },
+    { image: "https://soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/titanium-strap-3-17507372058muaV.png", alt: "Huawei Watch 5 - Angle View" },
+    { image: "https://soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/titanium-strap-4-1750737206UurkV.png", alt: "Huawei Watch 5 - Profile View" },
   ]
 
   const categories = ["Huawei", "Smart Watch", "Mobile Phone", "Accessories"]

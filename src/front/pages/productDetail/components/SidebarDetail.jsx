@@ -14,13 +14,13 @@ const SidebarDetail = () => {
   const advertisements = [
     {
       id: 1,
-      image: "/placeholder.svg?height=200&width=300",
+      image: "https://soklyphone.com/storage/Advertises/2025/04-04-2025/face-page-1744167472AoQ7V.jpg",
       title: "Special Offers",
       description: "Check out our latest deals",
     },
     {
       id: 2,
-      image: "/placeholder.svg?height=200&width=300",
+      image: "https://soklyphone.com/storage/Advertises/2025/07-07-2025/iphone-16-pro-max-8-7-25-1751940478L7ssv.jpg",
       title: "iPhone Deals",
       description: "Best prices on smartphones",
     },
@@ -78,7 +78,7 @@ const SidebarDetail = () => {
         <h4 className="font-semibold text-gray-900 mb-3">Recommended for You</h4>
         <div className="space-y-3">
           <div className="flex items-center space-x-3">
-            <img src="/placeholder.svg?height=50&width=50" alt="Product" className="w-12 h-12 rounded object-cover" />
+            <img src="https://soklyphone.com/storage/Advertises/2025/07-07-2025/iphone-16-16-plus-1751338334EjeAz.png" alt="Product" className="w-12 h-12 rounded object-cover" />
             <div className="flex-1">
               <div className="text-sm font-medium text-gray-900">iPhone 15 Pro Max</div>
               <div className="text-xs text-red-500 font-bold">
@@ -88,7 +88,7 @@ const SidebarDetail = () => {
           </div>
 
           <div className="flex items-center space-x-3">
-            <img src="/placeholder.svg?height=50&width=50" alt="Product" className="w-12 h-12 rounded object-cover" />
+            <img src="https://soklyphone.com/storage/Advertises/2025/07-07-2025/iphone-16e-04-07-25-175162244257SHS.jpg" alt="Product" className="w-12 h-12 rounded object-cover" />
             <div className="flex-1">
               <div className="text-sm font-medium text-gray-900">Samsung Galaxy S24</div>
               <div className="text-xs text-red-500 font-bold">
