@@ -1,3 +1,5 @@
+"use client"
+
 const SidebarDetail = () => {
   return (
     <div className="bg-white rounded-xl p-6 border-2 border-blue-200 shadow-sm">
