@@ -90,7 +90,7 @@ const SidebarDetail = () => {
           <div className="flex items-center space-x-3">
             <img src="https://soklyphone.com/storage/Advertises/2025/07-07-2025/iphone-16e-04-07-25-175162244257SHS.jpg" alt="Product" className="w-12 h-12 rounded object-cover" />
             <div className="flex-1">
-              <div className="text-sm font-medium text-gray-900">Samsung Galaxy S24</div>
+              <div className="text-sm font-medium text-gray-900">iPhone 14 Pro Max</div>
               <div className="text-xs text-red-500 font-bold">
                 $899 <span className="line-through text-gray-400">$999</span>
               </div>
