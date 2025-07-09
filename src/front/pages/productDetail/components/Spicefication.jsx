@@ -160,7 +160,7 @@ const Spicefication = () => {
         <div className="p-6">
           <div className="relative rounded-lg overflow-hidden bg-gray-900 group cursor-pointer">
             <img
-              src="/review-video-thumbnail.png"
+              src="https://img.youtube.com/vi/Lhmycs8vTUM/maxresdefault.jpg"
               alt="Huawei Watch 5 Review Video - X-TAP Technology"
               className="w-full h-64 md:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
             />
