@@ -1,22 +1,20 @@
-const Navbar = ({ items }) => {
-  return (
-    <nav className="bg-white border-b border-gray-200 px-6 py-4">
-      <div className="flex items-center space-x-2 text-sm text-gray-600">
-        {items.map((item, index) => (
-          <div key={index} className="flex items-center">
-            <span
-              className={
-                index === items.length - 1 ? "text-gray-900 font-medium" : "hover:text-blue-600 cursor-pointer"
-              }
-            >
-              {item}
-            </span>
-            {index < items.length - 1 && <span className="mx-2 text-gray-400">•</span>}
-          </div>
-        ))}
+const Navbar = ({items}) => {
+    return (
+        <div>
+                                <ul>
+                 <div className="max-w-7xl mx-auto px-6 py-4">
+        <nav className="text-sm text-gray-600">
+          <span className="hover:text-blue-600 cursor-pointer">Home</span>
+          <span className="mx-2">/</span>
+          <span className="hover:text-blue-600 cursor-pointer">Smart Watches</span>
+          <span className="mx-2">/</span>
+          <span className="hover:text-blue-600 cursor-pointer">Huawei</span>
+          <span className="mx-2">/</span>
+          <span className="text-gray-900 font-medium">Huawei Watch 5 46mm</span>
+        </nav>
       </div>
-    </nav>
-  )
+            </ul>
+        </div>
+    )
 }
-
-export default Navbar
+export default Navbar;

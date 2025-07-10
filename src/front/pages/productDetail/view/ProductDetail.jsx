@@ -1,13 +1,21 @@
 "use client"
+<<<<<<< HEAD
 import { useState, useEffect } from "react"
 import { useLocation, useParams, useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
+=======
+
+import { useState } from "react"
+import { ChevronLeft, ChevronRight, Smartphone, Camera, Battery } from "lucide-react"
+>>>>>>> c3277b5e38ab32307957658b8d5af78030e4a0b9
 import Slide from "../components/Slide"
 import PreOrder from "../components/PreOrder"
-import Specification from "../components/Specification"
+import Navbar from "../components/Navbar"
+import Spicefication from "../components/Spicefication"
 import SidebarDetail from "../components/SidebarDetail"
 
 const ProductDetail = () => {
+<<<<<<< HEAD
   const location = useLocation()
   const { slug } = useParams()
   const navigate = useNavigate()
@@ -497,6 +505,39 @@ const ProductDetail = () => {
       warranty: passedProduct.warranty,
       features: passedProduct.features || [],
     }
+=======
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  // Navigation items for the navbar
+  const navItems = ["Home", "Products", "Smart Watches", "Accessories", "Support", "About"]
+
+  const productImages = [
+    { image: "https://soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/black-1-1751362418cBcjK.png" },
+    { image: "https://soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/titanium-strap-1-1750737202niAeD.png" },
+    { image: "https://soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/titanium-strap-2-17507372037fN6T.png", alt: "Huawei Watch 5 - Back View" },
+    { image: "https://soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/titanium-strap-3-17507372058muaV.png", alt: "Huawei Watch 5 - Angle View" },
+    { image: "https://soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/titanium-strap-4-1750737206UurkV.png", alt: "Huawei Watch 5 - Profile View" },
+  ]
+
+  const categories = ["Huawei", "Smart Watch", "Mobile Phone", "Accessories"]
+
+  const specifications = [
+    { icon: <Smartphone className="w-6 h-6" />, label: '1.5"', description: "466x466 pixels" },
+    { icon: <Camera className="w-6 h-6" />, label: "NOMP", description: "" },
+    { icon: <Battery className="w-6 h-6" />, label: "867mAh", description: "" },
+  ]
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % productImages.length)
+  }
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + productImages.length) % productImages.length)
+  }
+
+  const handleThumbnailClick = (index) => {
+    setCurrentImageIndex(index)
+>>>>>>> c3277b5e38ab32307957658b8d5af78030e4a0b9
   }
 
   const [selectedColor, setSelectedColor] = useState("")
@@ -659,9 +700,11 @@ const ProductDetail = () => {
   const selectedImages = selectedColorData?.images?.length > 0 ? selectedColorData.images : productData.images
 
   return (
-    <div className="max-w-7xl mx-auto min-h-screen">
+    <div className="min-h-screen bg-gray-50">
+      {/* Navigation Bar */}
       <Navbar items={navItems} />
 
+<<<<<<< HEAD
       {/* Special Offer Banner */}
       {productData.isSpecialOffer && (
         <div className="bg-gradient-to-r from-red-500 to-yellow-400 text-white py-3 px-6 mb-6 rounded-lg">
@@ -700,6 +743,89 @@ const ProductDetail = () => {
           </div>
           <div className="w-full xl:w-80">
             <SidebarDetail />
+=======
+      {/* Breadcrumb Navigation */}
+     
+
+      {/* Main Product Content */}
+      <div className="max-w-7xl mx-auto p-6">
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left Column - Product Images */}
+            <div className="space-y-4">
+              {/* Main Product Image */}
+              <div className="relative bg-gray-50 rounded-lg overflow-hidden">
+                <div className="aspect-square relative">
+                  <img
+                    src={productImages[currentImageIndex]?.image || "https://via.placeholder.com/500x500"}
+                    alt="Huawei Watch 5 46mm"
+                    className="w-full h-full object-contain p-8"
+                  />
+                </div>
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Thumbnail Images */}
+              <Slide items={productImages} onImageClick={handleThumbnailClick} currentIndex={currentImageIndex} />
+
+              {/* Specifications */}
+              <div className="flex justify-center space-x-8 py-6 border-t border-gray-200">
+                {specifications.map((spec, index) => (
+                  <div key={index} className="text-center">
+                    <div className="flex justify-center mb-2 text-gray-600">{spec.icon}</div>
+                    <div className="font-semibold text-lg">{spec.label}</div>
+                    {spec.description && <div className="text-sm text-gray-500">{spec.description}</div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Column - Product Details */}
+            <div className="space-y-6">
+              {/* Product Title and Categories */}
+              <div className="space-y-4">
+                <h1 className="text-3xl font-bold text-gray-900">Huaweif Watch 5 46mm</h1>
+
+                {/* Category Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {categories.map((category, index) => (
+                    <span key={index} className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full font-medium">
+                      {category}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* PreOrder Component */}
+              <PreOrder />
+            </div>
+          </div>
+
+          {/* Specifications and Sidebar Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+            {/* Specifications - Takes 2/3 of the width */}
+            <div className="lg:col-span-2">
+              <Spicefication />
+            </div>
+
+            {/* Sidebar - Takes 1/3 of the width */}
+            <div className="lg:col-span-1">
+              <SidebarDetail />
+            </div>
+>>>>>>> c3277b5e38ab32307957658b8d5af78030e4a0b9
           </div>
         </div>
       </div>
