@@ -127,7 +127,7 @@ const SpecialOffer = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           {specialOffers.map((product, index) => (
-            <div
+            <div 
               key={product.id}
               className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
               data-aos="zoom-in"
