@@ -9,6 +9,7 @@ const FrontRoutes = () => {
             <Route path="/" element={<Master/>}>
                <Route index element={<HomePage/>}/>
                <Route path="/product/:slug" element={<ProductDetail/>}/>
+              
             </Route>
         </Routes>
     )

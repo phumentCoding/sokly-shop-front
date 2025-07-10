@@ -1,10 +1,13 @@
 "use client"
 
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import AOS from "aos"
 import "aos/dist/aos.css"
 
 const SmartWatch = () => {
+  const navigate = useNavigate()
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -23,24 +26,32 @@ const SmartWatch = () => {
       monthlyPrice: 36.0,
       isNew: true,
       warranty: 1,
+      category: "Smart Watch",
+      brand: "Huawei",
     },
     {
       id: 2,
       name: "Huawei Watch 5 42mm",
-      image: "https://www.soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/42mm/stainless-beige-1-1750741016HSr24.png",
+      image:
+        "https://www.soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/42mm/stainless-beige-1-1750741016HSr24.png",
       price: 499.0,
       monthlyPrice: 45.0,
       isNew: true,
       warranty: 1,
+      category: "Smart Watch",
+      brand: "Huawei",
     },
     {
       id: 3,
       name: "COROS PACE Pro GPS Sport Watch Suguru...",
-      image: "https://www.soklyphone.com/storage/COROS/coros-pace-pro-gps-sport-watch-suguru-osako-edition/1-1750393348C5Sw4.png",
+      image:
+        "https://www.soklyphone.com/storage/COROS/coros-pace-pro-gps-sport-watch-suguru-osako-edition/1-1750393348C5Sw4.png",
       price: 439.0,
       monthlyPrice: 39.0,
       isNew: true,
       warranty: 1,
+      category: "Smart Watch",
+      brand: "COROS",
     },
     {
       id: 4,
@@ -50,6 +61,8 @@ const SmartWatch = () => {
       monthlyPrice: null,
       isNew: true,
       warranty: 1,
+      category: "Smart Watch",
+      brand: "Huawei",
     },
     {
       id: 5,
@@ -59,6 +72,8 @@ const SmartWatch = () => {
       monthlyPrice: 50.0,
       isNew: true,
       warranty: 1,
+      category: "Smart Watch",
+      brand: "Garmin",
     },
     {
       id: 6,
@@ -68,8 +83,40 @@ const SmartWatch = () => {
       monthlyPrice: null,
       isNew: true,
       warranty: 1,
+      category: "Smart Watch",
+      brand: "Huawei",
     },
   ]
+
+  // Function to create URL-friendly slug from product name
+  const createSlug = (name) => {
+    return name
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "") // Remove special characters except hyphens
+      .replace(/\s+/g, "-") // Replace spaces with hyphens
+      .replace(/--+/g, "-") // Replace multiple hyphens with single hyphen
+      .trim()
+  }
+
+  // Function to handle product click
+  const handleProductClick = (product) => {
+    const slug = createSlug(product.name)
+    navigate(`/product/${slug}`, {
+      state: {
+        productData: product,
+      },
+    })
+  }
+
+  // Function to handle "View all" click
+  const handleViewAllClick = () => {
+    navigate("/products", {
+      state: {
+        selectedCategory: "Smart Watch",
+        categoryName: "Smart Watch",
+      },
+    })
+  }
 
   return (
     <section className="py-10 px-4 sm:px-6 lg:px-8 bg-white">
@@ -77,7 +124,10 @@ const SmartWatch = () => {
         {/* Section Header */}
         <div className="flex justify-between items-center mb-8" data-aos="fade-up">
           <h2 className="text-3xl font-bold text-gray-900">SMART WATCH</h2>
-          <button className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-2 transition-colors">
+          <button
+            onClick={handleViewAllClick}
+            className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-2 transition-colors"
+          >
             View all
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -90,9 +140,10 @@ const SmartWatch = () => {
           {smartWatches.map((product, index) => (
             <div
               key={product.id}
-              className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
+              className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full cursor-pointer"
               data-aos="zoom-in"
               data-aos-delay={index * 100}
+              onClick={() => handleProductClick(product)}
             >
               {/* Product Image Container */}
               <div className="relative p-6 bg-gray-50 flex-shrink-0">
@@ -102,7 +153,6 @@ const SmartWatch = () => {
                     NEW
                   </span>
                 )}
-
                 {/* Warranty Badge */}
                 <div className="absolute top-3 right-3">
                   <img
@@ -112,11 +162,10 @@ const SmartWatch = () => {
                     title="1 Year Warranty"
                   />
                 </div>
-
                 {/* Product Image */}
-                 <div className="mb-4">
+                <div className="mb-4">
                   <img
-                    src={product.image}
+                    src={product.image || "/placeholder.svg"}
                     alt={product.name}
                     className="w-32 h-32 object-cover block mx-auto"
                   />
@@ -129,13 +178,11 @@ const SmartWatch = () => {
                 <h3 className="text-md font-medium text-gray-900 mb-3 line-clamp-2 h-12 flex text-center">
                   {product.name}
                 </h3>
-
                 {/* Pricing - Fixed height container */}
                 <div className="mb-4 flex-shrink-0">
                   <div className="mb-2">
                     <span className="text-lg font-bold text-red-600">${product.price.toFixed(2)}</span>
                   </div>
-
                   {/* Monthly payment - Fixed height */}
                   <div className="h-4">
                     {product.monthlyPrice ? (
@@ -145,10 +192,16 @@ const SmartWatch = () => {
                     )}
                   </div>
                 </div>
-
                 {/* Add to Cart Button - Hidden by default, shows on hover */}
                 <div className="mt-auto">
-                  <button className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out transform group-hover:translate-y-3">
+                  <button
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out transform group-hover:translate-y-3"
+                    onClick={(e) => {
+                      e.stopPropagation() // Prevent triggering the card click
+                      // Handle add to cart functionality here
+                      console.log("Add to cart:", product.name)
+                    }}
+                  >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"

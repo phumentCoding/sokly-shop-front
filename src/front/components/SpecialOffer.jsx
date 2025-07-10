@@ -1,9 +1,12 @@
+"use client"
 
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import AOS from "aos"
 import "aos/dist/aos.css"
 
 const SpecialOffer = () => {
+  const navigate = useNavigate()
   const [timeLeft, setTimeLeft] = useState({
     days: 1,
     hours: 9,
@@ -51,6 +54,7 @@ const SpecialOffer = () => {
       monthlyPrice: 18.0,
       warranty: 1,
       isNew: true,
+      category: "Smart Watch",
     },
     {
       id: 2,
@@ -62,6 +66,7 @@ const SpecialOffer = () => {
       monthlyPrice: 98.0,
       warranty: 1,
       isNew: true,
+      category: "Laptop",
     },
     {
       id: 3,
@@ -73,6 +78,7 @@ const SpecialOffer = () => {
       monthlyPrice: 116.0,
       warranty: 1,
       isNew: true,
+      category: "Laptop",
     },
     {
       id: 4,
@@ -84,6 +90,7 @@ const SpecialOffer = () => {
       monthlyPrice: 116.0,
       warranty: 1,
       isNew: true,
+      category: "Laptop",
     },
     {
       id: 5,
@@ -95,20 +102,66 @@ const SpecialOffer = () => {
       monthlyPrice: 156.0,
       warranty: 1,
       isNew: true,
+      category: "Laptop",
     },
-
     {
       id: 6,
       name: "Sony WF-C510 Truly Wireless Headphones",
-      image: "https://www.soklyphone.com/storage/Accessories/SONY/Sony-WF-C510-truly-wireless-earbuds/blue-3-17305382889Tt2f.jpg",
+      image:
+        "https://www.soklyphone.com/storage/Accessories/SONY/Sony-WF-C510-truly-wireless-earbuds/blue-3-17305382889Tt2f.jpg",
       currentPrice: 59.0,
       originalPrice: 69.0,
       discount: 10,
       monthlyPrice: null,
       warranty: 1,
       isNew: true,
+      category: "Accessories",
     },
   ]
+
+  // Function to create URL-friendly slug from product name
+  const createSlug = (name) => {
+    return name
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "") // Remove special characters except hyphens
+      .replace(/\s+/g, "-") // Replace spaces with hyphens
+      .replace(/--+/g, "-") // Replace multiple hyphens with single hyphen
+      .trim()
+  }
+
+  // Function to handle product click
+  const handleProductClick = (product) => {
+    const slug = createSlug(product.name)
+    // Transform special offer product to match expected format
+    const transformedProduct = {
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      price: product.currentPrice, // Use current price instead of original
+      monthlyPrice: product.monthlyPrice || 0,
+      category: product.category,
+      warranty: product.warranty,
+      isNew: product.isNew,
+      originalPrice: product.originalPrice,
+      discount: product.discount,
+      isSpecialOffer: true, // Flag to identify special offer products
+    }
+
+    navigate(`/product/${slug}`, {
+      state: {
+        productData: transformedProduct,
+      },
+    })
+  }
+
+  // Function to handle "View all" click
+  const handleViewAllClick = () => {
+    navigate("/special-offers", {
+      state: {
+        specialOffers: specialOffers,
+      },
+    })
+  }
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
@@ -116,8 +169,11 @@ const SpecialOffer = () => {
         {/* Section Header */}
         <div className="flex justify-between items-center mb-8" data-aos="fade-up">
           <h2 className="text-3xl font-bold text-gray-900">SPECIAL OFFER</h2>
-          <button className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-2 transition-colors">
-            View allasxdxxx
+          <button
+            onClick={handleViewAllClick}
+            className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-2 transition-colors"
+          >
+            View all
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
@@ -129,9 +185,10 @@ const SpecialOffer = () => {
           {specialOffers.map((product, index) => (
             <div
               key={product.id}
-              className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
+              className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full cursor-pointer"
               data-aos="zoom-in"
               data-aos-delay={index * 100}
+              onClick={() => handleProductClick(product)}
             >
               {/* Product Image Container */}
               <div className="relative p-6 bg-gray-50 flex-shrink-0">
@@ -141,7 +198,6 @@ const SpecialOffer = () => {
                     NEW
                   </span>
                 )}
-
                 {/* Warranty Badge with Custom Image */}
                 <div className="absolute top-3 right-3">
                   <img
@@ -151,16 +207,14 @@ const SpecialOffer = () => {
                     title="1 Year Warranty"
                   />
                 </div>
-
                 {/* Product Image */}
                 <div className="mb-4">
                   <img
-                    src={product.image}
+                    src={product.image || "/placeholder.svg"}
                     alt={product.name}
                     className="w-32 h-32 object-cover block mx-auto"
                   />
                 </div>
-
               </div>
 
               {/* Product Info */}
@@ -169,17 +223,14 @@ const SpecialOffer = () => {
                 <h3 className="text-md font-medium text-gray-900 mb-3 line-clamp-2 h-12 flex text-center">
                   {product.name}
                 </h3>
-
                 {/* Discount Badge */}
-                <span className="inline-flex items-center gap-1 bg-gradient-to-r from-red-500 to-yellow-400 text-white text-xs sm:text-sm font-bold px-3 py-1 rounded-full shadow-lg">
+                <span className="inline-flex items-center gap-1 bg-gradient-to-r from-red-500 to-yellow-400 text-white text-xs sm:text-sm font-bold px-3 py-1 rounded-full shadow-lg mb-3">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path d="M12 8v4l3 3"></path>
                     <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
                   ${product.discount} Off
                 </span>
-
-
                 {/* Pricing - Fixed height container */}
                 <div className="mb-3 flex-shrink-0">
                   <div className="flex items-center gap-2 mb-1">
@@ -195,7 +246,6 @@ const SpecialOffer = () => {
                     )}
                   </div>
                 </div>
-
                 {/* Countdown Timer - Push to bottom */}
                 <div className="mt-auto mb-4">
                   <div className="flex items-center gap-1 text-xs text-gray-600 mb-2">
@@ -210,9 +260,15 @@ const SpecialOffer = () => {
                     {formatTime(timeLeft.seconds)}
                   </div>
                 </div>
-
                 {/* Add to Cart Button - Keep all original hover effects */}
-                <button className="w-auto bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded flex items-center justify-center gap-2 absolute left-0 right-0 bottom-0 mx-4 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out transform group-hover:translate-y-3">
+                <button
+                  className="w-auto bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded flex items-center justify-center gap-2 absolute left-0 right-0 bottom-0 mx-4 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out transform group-hover:translate-y-3"
+                  onClick={(e) => {
+                    e.stopPropagation() // Prevent triggering the card click
+                    // Handle add to cart functionality here
+                    console.log("Add to cart:", product.name)
+                  }}
+                >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
