@@ -4,7 +4,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Slide from "../components/Slide"
 import PreOrder from "../components/PreOrder"
-import Spicefication from "../components/Spicefication"
+import Specification from "../components/Specification" // Fixed import name
 import SidebarDetail from "../../../reusable/SidebarDetail"
 
 const ProductDetail = () => {
@@ -14,9 +14,10 @@ const ProductDetail = () => {
   const [productData, setProductData] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [productNotFound, setProductNotFound] = useState(false)
+
   const navItems = ["Home", "Products", "Accessories", "Smart Watch"]
 
-  // All available products data for slug matching
+  // Updated allProducts array to include special offers with consistent structure
   const allProducts = [
     // New Arrivals
     {
@@ -183,7 +184,7 @@ const ProductDetail = () => {
       warranty: 1,
       category: "Accessories",
     },
-    // Special Offers
+    // Special Offers - Updated to match SpecialOffer component
     {
       id: 16,
       name: "Garmin Forerunner 165 43mm Amoled...",
@@ -248,6 +249,19 @@ const ProductDetail = () => {
       warranty: 1,
       isNew: true,
       category: "Accessories",
+      isSpecialOffer: true,
+    },
+    {
+      id: 21,
+      name: 'MacBook Air 15" M4 2025 10C Sky Blue',
+      image: "https://www.soklyphone.com/storage/Apple/Macbook/Macbook-Air-M4-2025/sky-blue-1743661330mbBBn.png",
+      price: 1749.0,
+      originalPrice: 1839.0,
+      discount: 90,
+      monthlyPrice: 156.0,
+      warranty: 1,
+      isNew: true,
+      category: "Laptop",
       isSpecialOffer: true,
     },
   ]
@@ -354,7 +368,7 @@ const ProductDetail = () => {
     const createSpecifications = (product) => {
       const baseSpecs = [
         `Category: ${product.category || "N/A"}`,
-        `Price: $${product.price || product.currentPrice}`,
+        `Price: $${product.price}`,
         ...(product.warranty ? [`${product.warranty} Year Warranty`] : []),
       ]
 
@@ -483,7 +497,7 @@ const ProductDetail = () => {
     // Transform the product data to match ProductDetail format
     return {
       title: passedProduct.name,
-      price: passedProduct.price || passedProduct.currentPrice,
+      price: passedProduct.price,
       monthlyPrice: passedProduct.monthlyPrice || 0,
       category: passedProduct.category,
       brand: extractBrand(passedProduct.name),
@@ -552,11 +566,9 @@ const ProductDetail = () => {
   // Product not found state
   if (productNotFound) {
     const suggestedProducts = getSuggestedProducts()
-
     return (
       <div className="max-w-7xl mx-auto min-h-screen">
         <Navbar items={navItems} />
-
         <div className="flex flex-col items-center justify-center py-16 px-4">
           {/* 404 Error Section */}
           <div className="text-center mb-12">
@@ -566,7 +578,6 @@ const ProductDetail = () => {
               Sorry, we couldn't find the product you're looking for. The product may have been removed or the link is
               incorrect.
             </p>
-
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <button
@@ -581,7 +592,7 @@ const ProductDetail = () => {
                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                   />
                 </svg>
-                Go Homes
+                Go Home
               </button>
               <button
                 onClick={handleGoToProducts}
@@ -595,7 +606,7 @@ const ProductDetail = () => {
                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                   />
                 </svg>
-                Browse Productsss
+                Browse Products
               </button>
             </div>
           </div>
@@ -631,14 +642,11 @@ const ProductDetail = () => {
                       className="w-32 h-32 object-cover block mx-auto"
                     />
                   </div>
-
                   {/* Product Info */}
                   <div className="p-4">
                     <h3 className="text-sm font-medium text-gray-900 mb-2 line-clamp-2 h-10">{product.name}</h3>
                     <div className="flex items-center gap-2">
-                      <span className="text-lg font-bold text-red-600">
-                        ${(product.price || product.currentPrice)?.toFixed(2)}
-                      </span>
+                      <span className="text-lg font-bold text-red-600">${product.price?.toFixed(2)}</span>
                       {product.originalPrice && (
                         <span className="text-sm text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>
                       )}
@@ -693,7 +701,6 @@ const ProductDetail = () => {
 
         <div className="flex gap-6">
           <div className="flex-1 bg-white rounded-xl shadow-sm p-6">
-            {/* Pass both specificationData and productData to Specification component */}
             <Specification
               specificationData={{ aboutThisItem: productData.specifications }}
               productData={productData}

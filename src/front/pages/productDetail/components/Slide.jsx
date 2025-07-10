@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 "use client"
-
 import { useState, useEffect } from "react"
 
 const Slide = ({ images, selectedColor }) => {
@@ -17,32 +15,47 @@ const Slide = ({ images, selectedColor }) => {
   }
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="w-full h-full">
+    <div className="w-full h-full flex items-center justify-center bg-gray-50">
+      <div className="relative w-full max-w-md h-96">
         <img
           src={currentImages[currentImage] || "/placeholder.svg"}
           alt={`${selectedColor || "Product"} view ${currentImage + 1} of ${currentImages.length}`}
-          className="w-full h-full object-contain p-4 transition-opacity duration-300 cursor-pointer"
+          className="w-full h-full object-contain rounded-lg cursor-pointer transition-opacity duration-300"
           onClick={nextImage}
           onError={(e) => {
             e.target.src = "/placeholder.svg"
           }}
         />
+        {currentImages.length > 1 && (
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+            {currentImages.map((_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-colors ${
+                  index === currentImage ? "bg-blue-600" : "bg-gray-300"
+                }`}
+                onClick={() => setCurrentImage(index)}
+              />
+            ))}
+          </div>
+        )}
+        {currentImages.length > 1 && (
+          <div className="absolute top-1/2 transform -translate-y-1/2 left-2 right-2 flex justify-between pointer-events-none">
+            <button
+              className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center shadow-md pointer-events-auto hover:bg-white transition-colors"
+              onClick={() => setCurrentImage((prev) => (prev - 1 + currentImages.length) % currentImages.length)}
+            >
+              ←
+            </button>
+            <button
+              className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center shadow-md pointer-events-auto hover:bg-white transition-colors"
+              onClick={nextImage}
+            >
+              →
+            </button>
+          </div>
+        )}
       </div>
-=======
-const Slide = ({items}) => {
-    return (
-    <div className="flex overflow-x-auto gap-2 pb-2">
-      {items.map((item, index) => (
-        <div key={index} className="flex-shrink-0">
-          <img
-            src={item.image || "https://via.placeholder.com/80x80"}
-            alt={item.alt}
-            className="w-20 h-20 cborder-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 transition-colors object-cover"
-          />
-        </div>
-      ))}
->>>>>>> c3277b5e38ab32307957658b8d5af78030e4a0b9
     </div>
   )
 }
