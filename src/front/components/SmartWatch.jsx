@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import AOS from "aos"
 import "aos/dist/aos.css"
+import { useNavigate } from "react-router-dom"
 
 const SmartWatch = () => {
   useEffect(() => {
@@ -13,6 +14,8 @@ const SmartWatch = () => {
       offset: 100,
     })
   }, [])
+
+  const navigate = useNavigate();
 
   const smartWatches = [
     {
@@ -77,7 +80,7 @@ const SmartWatch = () => {
         {/* Section Header */}
         <div className="flex justify-between items-center mb-8" data-aos="fade-up">
           <h2 className="text-3xl font-bold text-gray-900">SMART WATCH</h2>
-          <button className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-2 transition-colors">
+          <button className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-2 transition-colors cursor-pointer">
             View all
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -90,7 +93,8 @@ const SmartWatch = () => {
           {smartWatches.map((product, index) => (
             <div
               key={product.id}
-              className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
+              onClick={() => navigate(`/product/${product.id}`)}
+              className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full cursor-pointer"
               data-aos="zoom-in"
               data-aos-delay={index * 100}
             >

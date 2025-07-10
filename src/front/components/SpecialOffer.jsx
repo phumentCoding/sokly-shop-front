@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import AOS from "aos"
 import "aos/dist/aos.css"
+import { useNavigate } from "react-router-dom"
 
 const SpecialOffer = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -10,6 +11,8 @@ const SpecialOffer = () => {
     minutes: 59,
     seconds: 59,
   })
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     AOS.init({
@@ -129,7 +132,8 @@ const SpecialOffer = () => {
           {specialOffers.map((product, index) => (
             <div
               key={product.id}
-              className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
+              onClick={() => navigate(`/product/${product.id}`)}
+              className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full cursor-pointer"
               data-aos="zoom-in"
               data-aos-delay={index * 100}
             >

@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react"
 import { Search, User, Menu, Phone, ChevronDown, X } from "lucide-react"
 
+// 🔷 Dropdown navigation items
+const NAV_ITEMS = [
+  { name: "Product", items: ["AllProduct", "Mobile Phone", "iPad", "Tablet", "Smart Watch", "laptop"] },
+  { name: "Accessories", items: ["AllAccessories","Case", "Charger", "Headphone", "Orther"] },
+  { name: "Secondhand", items: ["AllProduct", "Mobile Phone", "iPad", "Tablet", "Smart Watch", "laptop"] },
+  { name: "Special Offer", items: ["Tab Offers","Special Offer" , "All Offers"] }
+]
+
 const Navbar = () => {
   const [isScrollingDown, setIsScrollingDown] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
@@ -71,22 +79,18 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
-              <div className="flex items-center space-x-2">
-
-                <img
-                  src="https://www.soklyphone.com/storage/image-2022-07-02-164325-1656755040dyQxA.jpg"
-                  alt="Sokly Logo"
-                  className="h-10 lg:h-14 object-contain"
-                />
-              </div>
+              <img
+                src="https://www.soklyphone.com/storage/image-2022-07-02-164325-1656755040dyQxA.jpg"
+                alt="Sokly Logo"
+                className="h-10 lg:h-14 object-contain"
+              />
             </div>
 
-
-            {/* Search + Hamburger */}
+            {/* Search + Menu Toggle */}
             <div className="hidden md:flex flex-1 max-w-lg mx-4 relative items-center">
               {scrollY > 50 && (
                 <button
-                  onClick={() => setShowMenu((prev) => !prev)}
+                  onClick={() => setShowMenu(!showMenu)}
                   className="absolute left-[35rem] top-1/2 -translate-y-1/2 z-10 text-gray-600 hover:text-gray-900 p-2 rounded-md hover:bg-gray-100 transition"
                 >
                   {showMenu ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
@@ -104,7 +108,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Account / Mobile */}
+            {/* Account / Mobile Buttons */}
             <div className="flex items-center space-x-4">
               <div className="hidden lg:flex items-center space-x-2 text-gray-700">
                 <User className="h-5 w-5" />
@@ -130,18 +134,31 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* 🔹 Mobile + iPad Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden py-4 px-4 bg-blue-600 text-white space-y-2">
-          {['product', 'accessories', 'secondhand', 'special'].map((key) => (
-            <div key={key}>
+          {NAV_ITEMS.map((menu, idx) => (
+            <div key={idx}>
               <button
-                onClick={() => toggleDropdown(key)}
+                onClick={() => toggleDropdown(menu.name)}
                 className="flex items-center justify-between w-full py-2 hover:text-blue-200 transition-colors"
               >
-                <span className="capitalize">{key}</span>
-                <ChevronDown className={`h-4 w-4 transform transition-transform ${activeDropdown === key ? "rotate-180" : ""}`} />
+                <span>{menu.name}</span>
+                <ChevronDown className={`h-4 w-4 transform transition-transform ${activeDropdown === menu.name ? "rotate-180" : ""}`} />
               </button>
+              {activeDropdown === menu.name && (
+                <div className="pl-4">
+                  {menu.items.map((subItem, i) => (
+                    <a
+                      key={i}
+                      href="#"
+                      className="block py-1 text-sm hover:text-blue-200"
+                    >
+                      {subItem}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
           <a href="#" className="block py-2 hover:text-blue-200 transition-colors">Pre Order</a>
@@ -150,27 +167,31 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Desktop Nav */}
+      {/* 🔹 Desktop Dropdown Nav */}
       {(showMenu || scrollY <= 50) && (
         <nav className={`bg-blue-600 text-white hidden lg:block z-40 transition-all duration-300 ${showMenu && scrollY > 50 ? "sticky top-20" : ""}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center space-x-8 h-12">
-              <button className="flex items-center space-x-1 hover:text-blue-200 transition-colors">
-                <span>Product</span>
-                <ChevronDown className="h-4 w-4" />
-              </button>
-              <button className="flex items-center space-x-1 hover:text-blue-200 transition-colors">
-                <span>Accessories</span>
-                <ChevronDown className="h-4 w-4" />
-              </button>
-              <button className="flex items-center space-x-1 hover:text-blue-200 transition-colors">
-                <span>Secondhand</span>
-                <ChevronDown className="h-4 w-4" />
-              </button>
-              <button className="flex items-center space-x-1 hover:text-blue-200 transition-colors">
-                <span>Special Offer</span>
-                <ChevronDown className="h-4 w-4" />
-              </button>
+            <div className="flex space-x-8 h-16 items-center relative">
+              {NAV_ITEMS.map((menu, idx) => (
+                <div key={idx} className="relative group">
+                  <button className="flex items-center space-x-1 hover:text-blue-200 transition-colors">
+                    <span>{menu.name}</span>
+                    <ChevronDown className="h-4 w-4" />
+                  </button>
+                  <div className="absolute left-0 top-full mt-2 bg-white text-gray-800 shadow-lg rounded-md w-48 hidden group-hover:block z-50">
+                    {menu.items.map((item, i) => (
+                      <a
+                        key={i}
+                        href="#"
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        {item}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+
               <a href="#" className="hover:text-blue-200 transition-colors">Pre Order</a>
               <a href="#" className="hover:text-blue-200 transition-colors">News</a>
               <a href="#" className="hover:text-blue-200 transition-colors">Contact us</a>

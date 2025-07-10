@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import AOS from "aos"
 import "aos/dist/aos.css"
+import { useNavigate } from "react-router-dom"
 
 const NewArrival = () => {
   const [activeCategory, setActiveCategory] = useState("All")
@@ -13,7 +14,9 @@ const NewArrival = () => {
       once: true,
       offset: 100,
     })
-  }, [])
+  }, []);
+
+  const navigate = useNavigate();
 
   const categories = ["All", "Mobile Phone", "Tablet", "Smart Watch", "Laptop", "Accessories"]
 
@@ -124,7 +127,7 @@ const NewArrival = () => {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`text-sm font-medium transition-colors duration-300 pb-2 border-b-2 ${activeCategory === category
+                className={`text-sm font-medium transition-colors duration-300 pb-2 border-b-2 cursor-pointer ${activeCategory === category
                     ? "text-blue-600 border-blue-600"
                     : "text-gray-500 hover:text-gray-700 border-transparent hover:border-gray-300"
                   }`}
@@ -142,7 +145,8 @@ const NewArrival = () => {
           {filteredProducts.map((product, index) => (
             <div
               key={product.id}
-              className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-1 flex flex-col h-full"
+              onClick={() => navigate(`/product/${product.id}`)}
+              className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-1 flex flex-col h-full cursor-pointer"
               data-aos="zoom-in"
               data-aos-delay={index * 100}
             >

@@ -9,14 +9,14 @@ const Navbar = ({ items }) => {
             <React.Fragment key={index}>
               <span
                 className={
-                  index === item.length - 1
+                  index === items.length - 1
                     ? "text-gray-900"
                     : "hover:text-gray-900 cursor-pointer"
                 }
               >
                 {item}
               </span>
-              {index < item.length - 1 && <span>•</span>}
+              {index < items.length - 1 && <span>•</span>}
             </React.Fragment>
           ))}
         </div>
