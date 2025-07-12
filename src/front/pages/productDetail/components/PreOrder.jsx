@@ -8,19 +8,19 @@ export default function PreOrder({ productData, selectedColor, setSelectedColor 
   const [quantity, setQuantity] = useState(1)
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-semibold">{productData.title}</h2>
+    <div className="space-y-4 px-4 sm:px-0">
+      <h2 className="text-xl sm:text-2xl font-semibold">{productData.title}</h2>
 
       <div className="flex flex-wrap gap-2">
         {productData.tags.map((tag) => (
-          <span key={tag} className="bg-blue-900 text-white text-xs font-semibold px-2 py-1 rounded-full">
+          <span key={tag} className="bg-blue-900 text-white text-xs sm:text-sm font-semibold px-2 py-1 rounded-full">
             {tag}
           </span>
         ))}
       </div>
 
-      <p className="text-pink-600 text-2xl font-bold">${productData.price.toFixed(2)}</p>
-      <p className="text-gray-600 text-sm">Or ${productData.monthlyPrice.toFixed(2)}/mo. for 12 mo.</p>
+      <p className="text-pink-600 text-xl sm:text-2xl font-bold">${productData.price.toFixed(2)}</p>
+      <p className="text-gray-600 text-xs sm:text-sm">Or ${productData.monthlyPrice.toFixed(2)}/mo. for 12 mo.</p>
 
       <hr />
 
@@ -35,25 +35,29 @@ export default function PreOrder({ productData, selectedColor, setSelectedColor 
           />
           <div className="flex-1">
             <div className="flex justify-between items-center">
-              <span className="text-sm font-semibold text-blue-700">Free : ($29) Huawei Scale 3 + Huawei Health</span>
-              <span className="text-pink-600 font-bold">${productData.price.toFixed(2)}</span>
+              <span className="text-xs sm:text-sm font-semibold text-blue-700">
+                Free : ($29) Huawei Scale 3 + Huawei Health
+              </span>
+              <span className="text-pink-600 font-bold text-xs sm:text-sm">
+                ${productData.price.toFixed(2)}
+              </span>
             </div>
-            <p className="text-yellow-500 text-sm">(With add-on products)</p>
-            <div className="flex gap-3 mt-2">
+            <p className="text-yellow-500 text-xs sm:text-sm">(With add-on products)</p>
+            <div className="flex gap-2 sm:gap-3 mt-2 flex-wrap">
               <img
                 src="https://soklyphone.com/storage/SAMSUNG/Bluetooth-Earphones/Galaxy-Buds3/white-1-1721973084KowW4.png"
                 alt="Huawei Scale 3"
-                className="w-16 h-16 object-contain border rounded"
+                className="w-12 sm:w-16 h-12 sm:h-16 object-contain border rounded"
               />
               <img
                 src="https://soklyphone.com/storage/Accessories/Samsung/1-Gift/clear-cover-z-flip7-1752112979E5NVT.png"
                 alt="Huawei Health"
-                className="w-16 h-16 object-contain border rounded"
+                className="w-12 sm:w-16 h-12 sm:h-16 object-contain border rounded"
               />
               <img
                 src="https://soklyphone.com/storage/Accessories/Samsung/samsung-adapter-25-w/untitled-2-16347902543lFBq.png"
                 alt="Huawei Health"
-                className="w-16 h-16 object-contain border rounded"
+                className="w-12 sm:w-16 h-12 sm:h-16 object-contain border rounded"
               />
             </div>
           </div>
@@ -69,21 +73,23 @@ export default function PreOrder({ productData, selectedColor, setSelectedColor 
           />
           <div className="flex-1">
             <div className="flex justify-between items-center">
-              <span className="text-blue-600 font-semibold">No Promotion Price</span>
-              <span className="text-pink-600 font-bold">${productData.price.toFixed(2)}</span>
+              <span className="text-blue-600 font-semibold text-xs sm:text-sm">No Promotion Price</span>
+              <span className="text-pink-600 font-bold text-xs sm:text-sm">
+                ${productData.price.toFixed(2)}
+              </span>
             </div>
-            <p className="text-yellow-500 text-sm">No add-on products</p>
+            <p className="text-yellow-500 text-xs sm:text-sm">No add-on products</p>
           </div>
         </label>
       </div>
 
       <div>
-        <p className="font-medium mb-2">Choose your color</p>
+        <p className="font-medium text-sm sm:text-base mb-2">Choose your color</p>
         <div className="flex gap-2 flex-wrap">
           {productData.colors.map((color) => (
             <button
               key={color.name}
-              className={`border rounded px-4 py-2 flex items-center gap-2 transition-all ${
+              className={`border rounded px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-2 transition-all text-xs sm:text-sm ${
                 selectedColor === color.name
                   ? "border-blue-600 bg-blue-50 text-blue-700"
                   : "border-gray-300 text-gray-700"
@@ -98,31 +104,31 @@ export default function PreOrder({ productData, selectedColor, setSelectedColor 
         </div>
       </div>
 
-      <div className="font-semibold text-sm mt-2">Two Year Warranty</div>
+      <div className="font-semibold text-sm sm:text-base mt-2">Two Year Warranty</div>
 
-      <div className="flex items-center gap-4 mt-3">
+      <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-3">
         <div className="flex items-center border rounded overflow-hidden">
           <button
-            className="px-3 py-1 bg-gray-200 hover:bg-gray-300 transition-colors"
+            className="px-3 sm:px-4 py-2 bg-gray-200 hover:bg-gray-300 transition-colors"
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
           >
             –
           </button>
-          <div className="px-4 py-1 min-w-[3rem] text-center">{quantity}</div>
+          <div className="px-4 py-2 min-w-[3rem] text-center text-sm">{quantity}</div>
           <button
-            className="px-3 py-1 bg-gray-200 hover:bg-gray-300 transition-colors"
+            className="px-3 sm:px-4 py-2 bg-gray-200 hover:bg-gray-300 transition-colors"
             onClick={() => setQuantity(quantity + 1)}
           >
             +
           </button>
         </div>
 
-        <button className="flex items-center gap-2 px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded transition-colors">
+        <button className="flex items-center gap-2 px-4 sm:px-6 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded transition-colors text-sm">
           <ShoppingCart size={18} />
           Add to Cart
         </button>
 
-        <button className="text-blue-700 hover:text-blue-800 flex items-center gap-1 transition-colors">
+        <button className="text-blue-700 hover:text-blue-800 flex items-center gap-1 transition-colors text-sm">
           <Heart size={18} />
           Add to Favorite
         </button>

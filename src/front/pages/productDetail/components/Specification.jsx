@@ -275,11 +275,13 @@ const Specification = ({ specificationData, productData }) => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 p-4">
+    <div className="w-full sm:max-w-4xl mx-auto space-y-8 p-4 sm:p-6">
       {/* Disclaimer Section */}
       <div className="space-y-2">
-        <p className="text-sm text-gray-600">We can not guarantee that the information on this page is 100% correct.</p>
-        <div className="flex items-center space-x-1 text-sm">
+        <p className="text-xs sm:text-sm text-gray-600">
+          We can not guarantee that the information on this page is 100% correct.
+        </p>
+        <div className="flex items-center space-x-1 text-xs sm:text-sm">
           <span className="font-semibold text-gray-800">Source:</span>
           <a
             href="https://gsmarena.com"
@@ -295,18 +297,20 @@ const Specification = ({ specificationData, productData }) => {
 
       {/* Specifications Section */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-2xl font-bold text-gray-900 uppercase tracking-wide">SPECIFICATION</h2>
-          <p className="text-sm text-gray-600 mt-1">{productData?.title || "Product Specifications"}</p>
+        <div className="p-4 sm:p-6 border-b border-gray-200">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 uppercase tracking-wide">SPECIFICATION</h2>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">{productData?.title || "Product Specifications"}</p>
         </div>
         <div className="divide-y divide-gray-200">
           {Object.entries(specifications).map(([key, section]) => (
-            <div key={key} className="p-6">
+            <div key={key} className="p-4 sm:p-6">
               <button
                 onClick={() => toggleSection(key)}
                 className="flex items-center justify-between w-full text-left hover:bg-gray-50 -m-2 p-2 rounded transition-colors"
               >
-                <h3 className="text-lg font-semibold text-blue-600 uppercase tracking-wide">{section.title}</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-blue-600 uppercase tracking-wide">
+                  {section.title}
+                </h3>
                 {expandedSections[key] ? (
                   <ChevronUp className="w-5 h-5 text-gray-500" />
                 ) : (
@@ -316,9 +320,9 @@ const Specification = ({ specificationData, productData }) => {
               {expandedSections[key] && (
                 <div className="mt-4 space-y-3">
                   {section.details.map((detail, index) => (
-                    <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-2 py-1">
-                      <div className="font-medium text-gray-700">{detail.label}</div>
-                      <div className="md:col-span-2 text-gray-600">: {detail.value}</div>
+                    <div key={index} className="grid grid-cols-1 sm:grid-cols-3 gap-2 py-1">
+                      <div className="font-medium text-gray-700 text-xs sm:text-sm">{detail.label}</div>
+                      <div className="sm:col-span-2 text-gray-600 text-xs sm:text-sm">: {detail.value}</div>
                     </div>
                   ))}
                 </div>
@@ -330,7 +334,7 @@ const Specification = ({ specificationData, productData }) => {
 
       {/* Review Video Section */}
       <div className="space-y-4">
-        <h2 className="text-xl font-bold text-gray-800 uppercase tracking-wide">REVIEW VIDEO</h2>
+        <h2 className="text-lg sm:text-xl font-bold text-gray-800 uppercase tracking-wide">REVIEW VIDEO</h2>
         <div className="relative">
           <div
             className="relative rounded-lg overflow-hidden bg-gray-900 group cursor-pointer shadow-lg"
@@ -349,31 +353,28 @@ const Specification = ({ specificationData, productData }) => {
             <img
               src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
               alt={`${productData?.title || "Product"} Review Video`}
-              className="w-full h-80 md:h-96 object-cover transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-64 sm:h-80 md:h-96 object-cover transition-transform duration-300 group-hover:scale-105"
             />
             {/* Play Button Overlay */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-white bg-opacity-90 rounded-full p-6 group-hover:bg-opacity-100 transition-all duration-300 transform group-hover:scale-110 shadow-lg">
-                <Play className="w-8 h-8 text-gray-800 ml-1" fill="currentColor" />
+              <div className="bg-white bg-opacity-90 rounded-full p-4 sm:p-6 group-hover:bg-opacity-100 transition-all duration-300 transform group-hover:scale-110 shadow-lg">
+                <Play className="w-6 sm:w-8 h-6 sm:h-8 text-gray-800 ml-1" fill="currentColor" />
               </div>
             </div>
             {/* Product Category Badge */}
-            <div className="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+            <div className="absolute top-4 left-4 bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
               {productData?.category || "Product"} Review
             </div>
             {/* Caption at bottom */}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-              <p className="text-white text-sm bg-black bg-opacity-50 px-3 py-1 rounded">
+              <p className="text-white text-xs sm:text-sm bg-black bg-opacity-50 px-2 sm:px-3 py-1 rounded">
                 {productData?.title || "Product"} - Complete Review
               </p>
             </div>
           </div>
         </div>
       </div>
-      
     </div>
-    
-    
   )
 }
 
