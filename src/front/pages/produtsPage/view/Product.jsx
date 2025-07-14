@@ -9,6 +9,7 @@ const Product = () => {
       
        <Nabar items={[]}/>
        {/* <FilterProduct/> */}
+        <h1 className='max-w-7xl mx-auto px-6 '>Mobile Phone</h1>
         <FilterProduct/>
         
 
