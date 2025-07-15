@@ -1,11 +1,15 @@
+"use client"
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { Search, User, Menu, Phone, ChevronDown, X } from "lucide-react"
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const [isScrollingDown, setIsScrollingDown] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState(null)
+  const [activeMobileDropdown, setActiveMobileDropdown] = useState(null)
   const [scrollY, setScrollY] = useState(0)
 
   useEffect(() => {
@@ -33,6 +37,90 @@ const Navbar = () => {
 
   const toggleDropdown = (dropdown) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown)
+  }
+
+  const toggleMobileDropdown = (dropdown) => {
+    setActiveMobileDropdown(activeMobileDropdown === dropdown ? null : dropdown)
+  }
+
+  const handleNavigation = (category) => {
+    navigate(`/product/show/${category.toLowerCase().replace(/\s+/g, "-")}`)
+    setActiveDropdown(null)
+    setMobileMenuOpen(false)
+  }
+
+  const dropdownContent = {
+    product: {
+      title: "Products",
+      categories: [
+        {
+          name: "Mobile Devices",
+          items: [
+            { name: "Mobile Phone", route: "mobile-phone" },
+            { name: "Tablet", route: "tablet" },
+            { name: "SmartWatch", route: "smartwatch" },
+          ],
+        },
+        {
+          name: "Computers",
+          items: [
+            { name: "Laptop", route: "laptop" },
+            { name: "Desktop", route: "desktop" },
+            { name: "Gaming PC", route: "gaming-pc" },
+          ],
+        },
+      ],
+    },
+    accessories: {
+      title: "Accessories",
+      categories: [
+        {
+          name: "Phone Accessories",
+          items: [
+            { name: "Cases & Covers", route: "cases-covers" },
+            { name: "Screen Protectors", route: "screen-protectors" },
+            { name: "Chargers", route: "chargers" },
+            { name: "Headphones", route: "headphones" },
+          ],
+        },
+        {
+          name: "Computer Accessories",
+          items: [
+            { name: "Keyboards", route: "keyboards" },
+            { name: "Mice", route: "mice" },
+            { name: "Monitors", route: "monitors" },
+            { name: "Speakers", route: "speakers" },
+          ],
+        },
+      ],
+    },
+    secondhand: {
+      title: "Second Hand",
+      categories: [
+        {
+          name: "Refurbished Devices",
+          items: [
+            { name: "Used Phones", route: "used-phones" },
+            { name: "Used Laptops", route: "used-laptops" },
+            { name: "Used Tablets", route: "used-tablets" },
+          ],
+        },
+      ],
+    },
+    special: {
+      title: "Special Offers",
+      categories: [
+        {
+          name: "Current Deals",
+          items: [
+            { name: "Flash Sale", route: "flash-sale" },
+            { name: "Bundle Offers", route: "bundle-offers" },
+            { name: "Clearance", route: "clearance" },
+            { name: "New Arrivals", route: "new-arrivals" },
+          ],
+        },
+      ],
+    },
   }
 
   return (
@@ -69,20 +157,16 @@ const Navbar = () => {
       <div className="bg-white shadow-sm lg:sticky lg:top-0 z-50 transition-all duration-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
-              <div className="flex items-center space-x-2">
-
+              <button onClick={() => navigate("/")}>
                 <img
                   src="https://www.soklyphone.com/storage/image-2022-07-02-164325-1656755040dyQxA.jpg"
                   alt="Sokly Logo"
-                  className="h-10 lg:h-14 object-contain"
+                  className="h-10 lg:h-14 object-contain cursor-pointer"
                 />
-              </div>
+              </button>
             </div>
 
-
-            {/* Search + Hamburger */}
             <div className="hidden md:flex flex-1 max-w-lg mx-4 relative items-center">
               {scrollY > 50 && (
                 <button
@@ -92,7 +176,7 @@ const Navbar = () => {
                   {showMenu ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
                 </button>
               )}
-              <div className={`w-full ${scrollY > 50 ? "pl-8" : ""}`}>
+              <div className={`w-full relative ${scrollY > 50 ? "pl-8" : ""}`}>
                 <input
                   type="text"
                   placeholder="Search"
@@ -104,7 +188,6 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Account / Mobile */}
             <div className="flex items-center space-x-4">
               <div className="hidden lg:flex items-center space-x-2 text-gray-700">
                 <User className="h-5 w-5" />
@@ -133,47 +216,117 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden py-4 px-4 bg-blue-600 text-white space-y-2">
-          {['product', 'accessories', 'secondhand', 'special'].map((key) => (
+          {["product", "accessories", "secondhand", "special"].map((key) => (
             <div key={key}>
               <button
-                onClick={() => toggleDropdown(key)}
+                onClick={() => toggleMobileDropdown(key)}
                 className="flex items-center justify-between w-full py-2 hover:text-blue-200 transition-colors"
               >
-                <span className="capitalize">{key}</span>
-                <ChevronDown className={`h-4 w-4 transform transition-transform ${activeDropdown === key ? "rotate-180" : ""}`} />
+                <span className="capitalize">{key === "special" ? "Special Offer" : key}</span>
+                <ChevronDown
+                  className={`h-4 w-4 transform transition-transform ${
+                    activeMobileDropdown === key ? "rotate-180" : ""
+                  }`}
+                />
               </button>
+              {activeMobileDropdown === key && (
+                <div className="pl-4 py-2 space-y-2 bg-blue-700 rounded-md mt-2">
+                  {dropdownContent[key].categories.map((category, idx) => (
+                    <div key={idx} className="space-y-1">
+                      <div className="font-semibold text-blue-200 text-sm">{category.name}</div>
+                      {category.items.map((item, itemIdx) => (
+                        <button
+                          key={itemIdx}
+                          onClick={() => handleNavigation(item.name)}
+                          className="block text-sm py-1 hover:text-blue-100 transition-colors w-full text-left"
+                        >
+                          {item.name}
+                        </button>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
-          <a href="#" className="block py-2 hover:text-blue-200 transition-colors">Pre Order</a>
-          <a href="#" className="block py-2 hover:text-blue-200 transition-colors">News</a>
-          <a href="#" className="block py-2 hover:text-blue-200 transition-colors">Contact us</a>
+          <button
+            onClick={() => navigate("/preorder")}
+            className="block py-2 hover:text-blue-200 transition-colors w-full text-left"
+          >
+            Pre Order
+          </button>
+          <button
+            onClick={() => navigate("/news")}
+            className="block py-2 hover:text-blue-200 transition-colors w-full text-left"
+          >
+            News
+          </button>
+          <button
+            onClick={() => navigate("/contact")}
+            className="block py-2 hover:text-blue-200 transition-colors w-full text-left"
+          >
+            Contact us
+          </button>
         </div>
       )}
 
-      {/* Desktop Nav */}
+      {/* Desktop Dropdown Menu */}
       {(showMenu || scrollY <= 50) && (
-        <nav className={`bg-blue-600 text-white hidden lg:block z-40 transition-all duration-300 ${showMenu && scrollY > 50 ? "sticky top-20" : ""}`}>
+        <nav
+          className={`bg-blue-600 text-white hidden lg:block z-40 transition-all duration-300 ${
+            showMenu && scrollY > 50 ? "sticky top-20" : ""
+          }`}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center space-x-8 h-12">
-              <button className="flex items-center space-x-1 hover:text-blue-200 transition-colors">
-                <span>Product</span>
-                <ChevronDown className="h-4 w-4" />
+            <div className="flex items-center space-x-8 h-12 relative">
+              {["product", "accessories", "secondhand", "special"].map((key) => (
+                <div key={key} className="relative group">
+                  <button
+                    onClick={() => toggleDropdown(key)}
+                    onMouseEnter={() => setActiveDropdown(key)}
+                    className="flex items-center space-x-1 hover:text-blue-200 transition-colors py-3"
+                  >
+                    <span className="capitalize">{key === "special" ? "Special Offer" : key}</span>
+                    <ChevronDown
+                      className={`h-4 w-4 transform transition-transform ${activeDropdown === key ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {activeDropdown === key && (
+                    <div
+                      className="absolute top-full left-0 mt-0 w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-4 z-50"
+                      onMouseLeave={() => setActiveDropdown(null)}
+                    >
+                      <div className="p-4 space-y-4">
+                        {dropdownContent[key].categories.map((category, idx) => (
+                          <div key={idx}>
+                            <h4 className="font-medium text-gray-900 mb-2">{category.name}</h4>
+                            <div className="space-y-1">
+                              {category.items.map((item, itemIdx) => (
+                                <button
+                                  key={itemIdx}
+                                  onClick={() => handleNavigation(item.name)}
+                                  className="block text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 px-2 py-1 rounded transition-colors w-full text-left"
+                                >
+                                  {item.name}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+              <button onClick={() => navigate("/preorder")} className="hover:text-blue-200 transition-colors">
+                Pre Order
               </button>
-              <button className="flex items-center space-x-1 hover:text-blue-200 transition-colors">
-                <span>Accessories</span>
-                <ChevronDown className="h-4 w-4" />
+              <button onClick={() => navigate("/news")} className="hover:text-blue-200 transition-colors">
+                News
               </button>
-              <button className="flex items-center space-x-1 hover:text-blue-200 transition-colors">
-                <span>Secondhand</span>
-                <ChevronDown className="h-4 w-4" />
+              <button onClick={() => navigate("/contact")} className="hover:text-blue-200 transition-colors">
+                Contact us
               </button>
-              <button className="flex items-center space-x-1 hover:text-blue-200 transition-colors">
-                <span>Special Offer</span>
-                <ChevronDown className="h-4 w-4" />
-              </button>
-              <a href="#" className="hover:text-blue-200 transition-colors">Pre Order</a>
-              <a href="#" className="hover:text-blue-200 transition-colors">News</a>
-              <a href="#" className="hover:text-blue-200 transition-colors">Contact us</a>
             </div>
           </div>
         </nav>
