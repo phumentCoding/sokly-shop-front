@@ -2,23 +2,39 @@ import React from "react";
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="bg-white border rounded-lg shadow hover:shadow-md transition p-4 text-center">
+    <div className="group border rounded-xl shadow-sm bg-white p-4 hover:shadow-md transition relative overflow-hidden">
+      {/* Product Image and Labels */}
       <div className="relative">
         <img
           src={product.image}
           alt={product.name}
-          className="mx-auto h-40 object-contain"
+          className="h-32 mx-auto object-contain transition-transform duration-300 group-hover:scale-105"
         />
-        <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+        <span className="absolute top-0 left-0 bg-red-600 text-white text-xs px-2 py-0.5 rounded-tr-lg rounded-bl-lg">
           NEW
         </span>
+        <span className="absolute top-0 right-0 bg-yellow-400 text-white text-xs px-2 py-0.5 rounded-tl-lg rounded-br-lg">
+          ⭐
+        </span>
       </div>
-      <h2 className="text-lg font-semibold mt-4">{product.name}</h2>
-      <p className="text-pink-600 text-xl font-bold">${product.price}.00</p>
-      <p className="text-gray-500 text-sm">Or {product.monthly} for 12 mo.</p>
-      <button className="mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
-        Add to Cart
-      </button>
+
+      {/* Product Info */}
+      <h3 className="mt-3 font-semibold text-gray-800 text-center text-sm">
+        {product.name}
+      </h3>
+      <p className="text-center text-red-600 font-bold text-base">
+        ${product.price}.00
+      </p>
+      <p className="text-center text-xs text-gray-500">
+        {product.monthly} for 12 mo.
+      </p>
+
+      {/* Add to Cart Button (Appears on Hover) */}
+      <div className="absolute inset-0 bg-white bg-opacity-80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-full shadow-lg">
+          🛒 Add to Cart
+        </button>
+      </div>
     </div>
   );
 };
