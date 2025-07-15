@@ -48,6 +48,7 @@ const Product = () => {
   }
 
   const categories = ["All", "iPhone", "Android", "Tablets"]
+
   const brands = [
     { name: "Apple", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/apple-logo-1660278979YARnJ.jpg" },
     {
@@ -61,7 +62,9 @@ const Product = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100">
       <div className="max-w-7xl mx-auto px-4 py-8">
+        
         <Navbar items={["Apple", "Samsung", "Huawei", "Oppo"]} />
+
         <h1 className="text-4xl font-extrabold text-gray-800 mb-6">Mobile Phones</h1>
 
         <div className="flex flex-col lg:flex-row gap-6">
