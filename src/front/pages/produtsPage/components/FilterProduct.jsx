@@ -1,38 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-
-
-const FilterProduct = ({categories,brands}) => {
-  const [selectedCategories, setSelectedCategories] = useState(["All"]);
-
+const FilterProduct = ({
+  categories,
+  brands,
+  selectedCategories,
+  selectedBrand,
+  setSelectedCategories,
+  setSelectedBrand,
+}) => {
   const toggleCategory = (cat) => {
-    if (cat === "All") {
-      setSelectedCategories(["All"]);
+    if (cat === 'All') {
+      setSelectedCategories(['All']);
     } else {
       setSelectedCategories((prev) =>
         prev.includes(cat)
           ? prev.filter((item) => item !== cat)
-          : [...prev.filter((item) => item !== "All"), cat]
+          : [...prev.filter((item) => item !== 'All'), cat]
       );
     }
   };
 
+  const toggleBrand = (brandName) => {
+    setSelectedBrand((prev) => (prev === brandName ? null : brandName));
+  };
+
   const resetFilters = () => {
-    setSelectedCategories(["All"]);
+    setSelectedCategories(['All']);
+    setSelectedBrand(null);
   };
 
   return (
     <div className="space-y-6">
-      {/* Categories Section */}
+      {/* Categories */}
       <div>
         <div className="flex justify-between items-center mb-2">
           <h2 className="font-bold text-lg text-gray-800">CATEGORIES</h2>
-          <button
-            onClick={resetFilters}
-            className="text-sm text-blue-600 hover:underline"
-          >
-            Reset
-          </button>
+          <button onClick={resetFilters} className="text-sm text-blue-600 hover:underline">Reset</button>
         </div>
         <div className="flex flex-col space-y-2">
           {categories.map((cat) => (
@@ -43,13 +46,7 @@ const FilterProduct = ({categories,brands}) => {
                 onChange={() => toggleCategory(cat)}
                 className="form-checkbox text-blue-600"
               />
-              <span
-                className={
-                  selectedCategories.includes(cat)
-                    ? 'text-blue-700 font-semibold'
-                    : 'text-gray-700'
-                }
-              >
+              <span className={selectedCategories.includes(cat) ? 'text-blue-700 font-semibold' : 'text-gray-700'}>
                 {cat}
               </span>
             </label>
@@ -57,20 +54,22 @@ const FilterProduct = ({categories,brands}) => {
         </div>
       </div>
 
-      {/* Brand Section */}
+      {/* Brands */}
       <div>
         <h2 className="font-bold text-lg text-gray-800 mb-2">BRAND</h2>
         <div className="grid grid-cols-2 gap-3">
           {brands.map((brand) => (
             <button
               key={brand.name}
-              className="border rounded-lg p-2 hover:shadow-sm bg-white flex items-center justify-center"
+              onClick={() => toggleBrand(brand.name)}
+              className={`border rounded-lg p-2 flex items-center justify-center transition
+                ${
+                  selectedBrand === brand.name
+                    ? 'border-blue-600 ring-2 ring-blue-200 bg-blue-50'
+                    : 'bg-white hover:shadow-sm'
+                }`}
             >
-              <img
-                src={brand.logo}
-                alt={brand.name}
-                className="h-6 object-contain"
-              />
+              <img src={brand.logo} alt={brand.name} className="h-6 object-contain" />
             </button>
           ))}
         </div>

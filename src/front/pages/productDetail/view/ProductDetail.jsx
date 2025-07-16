@@ -66,7 +66,7 @@ const ProductDetail = () => {
     {
       id: 5,
       name: "Xiaomi Redmi Pad 2 4G",
-      image: "https://www.soklyphone.com/storage/Xiaomi/Xiaomi-Redmi-Pad-2/graphite-grey-1750756398BjDZZ.png",
+      image: "https://i.pinimg.com/1200x/c0/c2/bc/c0c2bc3d29b6d9d957791f809ef87d67.jpg",
       price: 199.0,
       monthlyPrice: 18.0,
       category: "Tablet",
@@ -97,7 +97,7 @@ const ProductDetail = () => {
     {
       id: 8,
       name: "Huawei Watch 5 46mm",
-      image: "https://www.soklyphone.com/storage/Huawei/HUAWEI-Watch/Huawei-Watch-5/black-1-1751362418cBcjK.png",
+      image: "https://i.pinimg.com/1200x/de/53/29/de5329d0558c5e97ec64a25f423e035b.jpg",
       price: 399.0,
       monthlyPrice: 36.0,
       category: "Smart Watch",
@@ -264,6 +264,20 @@ const ProductDetail = () => {
       category: "Laptop",
       isSpecialOffer: true,
     },
+
+    {
+      id: 22,
+      name: 'i phone 15 Pro Max 256GB',
+      image: "https://i.pinimg.com/736x/b3/e6/ae/b3e6aeaa47709e1e4d23a7b2776b9b12.jpg",
+      price: 1749.0,
+      originalPrice: 1839.0,
+      discount: 90,
+      monthlyPrice: 156.0,
+      warranty: 1,
+      isNew: true,
+      category: "iphone",
+      isSpecialOffer: true,
+    },
   ]
 
   // Function to create URL-friendly slug from product name
@@ -283,6 +297,8 @@ const ProductDetail = () => {
       return productSlug === targetSlug
     })
   }
+
+  
 
   // Default product data structure
   const defaultProductData = {
