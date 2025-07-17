@@ -13,7 +13,13 @@ const Product = () => {
   const [selectedCategories, setSelectedCategories] = useState(["All"]);
   const [selectedBrand, setSelectedBrand] = useState(null);
 
-  const categories = ["All", "iPhone", "Android", "Tablet", "Laptop", "Smartwatch"];
+  const categories = [
+    "All", "iPhone", "Android", "Tablet", "Laptop", "Smartwatch",
+    "Cases & Covers", "Screen Protectors", "Chargers", "Headphones",
+    "Keyboards", "Mice", "Monitors", "Speakers", "Used Phones",
+    "Used Laptops", "Used Tablets", "Flash Sale", "Bundle Offers",
+    "Clearance", "New Arrivals"
+  ];
 
   useEffect(() => {
     if (category) {
@@ -67,33 +73,19 @@ const Product = () => {
   ];
 
   const brands = [
-    {
-      name: "Apple",
-      logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/apple-logo-1660278979YARnJ.jpg",
-    },
-    {
-      name: "Samsung",
-      logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/samsung-logo-1660279193xqNqc.jpg",
-    },
-    {
-      name: "Honor",
-      logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/logo-honor-1684557771ISZqr.jpg",
-    },
-    {
-      name: "Xiaomi",
-      logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/xiaomi-logo-1660279429OwLtj.jpg",
-    },
+    { name: "Apple", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/apple-logo.jpg" },
+    { name: "Samsung", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/samsung-logo.jpg" },
+    { name: "Honor", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/logo-honor.jpg" },
+    { name: "Xiaomi", logo: "https://www.soklyphone.com/storage/Brand_Logo/new_logo/xiaomi-logo.jpg" },
   ];
 
   const filteredProducts = products.filter((product) => {
     const matchCategory =
       selectedCategories.includes("All") ||
-      selectedCategories.some(
-        (selected) => selected.toLowerCase() === product.category.toLowerCase()
+      selectedCategories.some((selected) =>
+        selected.toLowerCase() === product.category.toLowerCase()
       );
-
     const matchBrand = !selectedBrand || product.brand === selectedBrand;
-
     return matchCategory && matchBrand;
   });
 
@@ -116,11 +108,14 @@ const Product = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <Navbar items={["iPhone", "Android", "Tablet", "Laptop", "Smartwatch"]} />
-        <h1 className="text-4xl font-extrabold text-gray-800 mb-6">Mobile Phones</h1>
+        <Navbar items={selectedCategories} />
+        <h1 className="text-4xl font-extrabold text-gray-800 mb-6">
+          {selectedCategories.includes("All")
+            ? "All Products"
+            : selectedCategories.join(", ")}
+        </h1>
 
         <div className="flex flex-col lg:flex-row gap-6">
-          {/* Filter Sidebar */}
           <aside className="w-full lg:w-1/4">
             <FilterProduct
               categories={categories}
@@ -132,7 +127,6 @@ const Product = () => {
             />
           </aside>
 
-          {/* Product List */}
           <main className="w-full lg:w-2/4">
             <ProductShow
               items={filteredProducts}
@@ -140,7 +134,6 @@ const Product = () => {
             />
           </main>
 
-          {/* Extra Sidebar */}
           <aside className="hidden xl:block w-1/4">
             <SidebarDetail />
           </aside>
