@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Search, User, Menu, Phone, ChevronDown, X } from "lucide-react"
+import { Search, User, Menu, Phone, ChevronDown, X, ShoppingCart, Bell } from "lucide-react"
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -188,14 +188,27 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="hidden lg:flex items-center space-x-2 text-gray-700">
-                <User className="h-5 w-5" />
-                <div className="text-sm">
-                  <div className="font-medium">My Account</div>
-                  <div className="text-gray-500">Register or Login</div>
+            <div className="flex items-center space-x-10 ">
+               <ShoppingCart className="w-6 h-6 text-gray-600 cursor-pointer" />
+                <Bell className="w-6 h-6 text-gray-600 cursor-pointer" />
+               <div
+                  onClick={() => navigate("/account/profile")}
+                  className="hidden lg:flex items-center space-x-2 text-gray-700 cursor-pointer hover:text-blue-600 transition"
+                >
+                  {/* Profile Image */}
+                  <img
+                    src="https://scontent.fpnh24-1.fna.fbcdn.net/v/t39.30808-1/456268015_1066171398355955_6754295906527611875_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=104&ccb=1-7&_nc_sid=e99d92&_nc_ohc=mqkhLa22xjUQ7kNvwGC-qMp&_nc_oc=AdlhImvxjlJo3238Gb50iusK6f4Aw6FNpq9kGDdUEPxdcPO4zsvSBC2iPjBTvM5Blv4&_nc_zt=24&_nc_ht=scontent.fpnh24-1.fna&_nc_gid=HCNZygUrL1Oh-45xff1Fow&oh=00_AfQlKyCdk-hrndZugVuXAaPW4i0dJAOMA3Yid0NQqPXQHA&oe=6884532B" // Replace with the actual path to your image
+                    alt="User Avatar"
+                    className="w-12 h-12 rounded-full object-cover border border-gray-300"
+                  />
+
+                  {/* Text Info */}
+                  <div className="text-sm">
+                    <div className="font-medium">Welcome</div>
+                    <div className="text-gray-500">Yang Chanthorony</div>
+                  </div>
                 </div>
-              </div>
+
               <button className="md:hidden p-2 text-gray-600 hover:text-gray-900">
                 <Search className="h-5 w-5" />
               </button>
