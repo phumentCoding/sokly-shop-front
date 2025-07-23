@@ -263,7 +263,7 @@ const Navbar = () => {
             </div>
           ))}
           <button
-            onClick={() => navigate("/preorder")}
+            onClick={() => navigate("/preOrder")}
             className="block py-2 hover:text-blue-200 transition-colors w-full text-left"
           >
             Pre Order
