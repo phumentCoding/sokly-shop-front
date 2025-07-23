@@ -29,7 +29,7 @@ const ContactUs = () => {
             <p>078 311 111</p>
           </div>
           <img
-            src="https://cdn-icons-png.flaticon.com/512/3615/3615874.png"
+            src="https://soklyphone.com/img/customer_service_generated.jpg"
             alt="Contact Illustration"
             className="w-64 mt-4"
           />
