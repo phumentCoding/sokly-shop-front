@@ -9,6 +9,11 @@ import Favorite from "../pages/account/components/Favorite";
 import Contact from "../pages/contact";
 import News from "../pages/news";
 import PreOrder from "../pages/preorder";
+import MyCoupon from "../pages/account/components/MyCoupon";
+import ReferAFriend from "../pages/account/components/ReferFriend";
+
+
+
 
 
 
@@ -30,6 +35,13 @@ const FrontRoutes = () => {
                
                 <Route path="/account/my-order" element={<MyOrders/>}/>
                 <Route path="/account/favorite" element={<Favorite/>}/>
+                <Route path="/account/coupon" element={<MyCoupon />} />
+                <Route path="/account/refer" element={<ReferAFriend/>} />
+
+
+
+              
+             
                 {/* Add other routes as needed */}
               
             </Route>

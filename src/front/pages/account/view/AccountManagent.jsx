@@ -1,22 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   User,
   Calendar,
   Mail,
   Phone,
-  LogOut,
-  Lock,
-  Star,
-  Heart,
-  TicketPercent,
-  ShoppingCart,
 } from "lucide-react";
+import Sidebar from "../components/Sidebar";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [user, setUser] = useState({
     name: "Chanthrony Yang",
@@ -24,35 +20,31 @@ const ProfilePage = () => {
     birthday: "2025-07-22",
     phone: "",
     address: "",
+    profileUrl: "https://scontent.fpnh24-1.fna.fbcdn.net/v/t39.30808-1/456268015_1066171398355955_6754295906527611875_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=104&ccb=1-7&_nc_sid=e99d92&_nc_ohc=mqkhLa22xjUQ7kNvwGC-qMp&_nc_oc=AdlhImvxjlJo3238Gb50iusK6f4Aw6FNpq9kGDdUEPxdcPO4zsvSBC2iPjBTvM5Blv4&_nc_zt=24&_nc_ht=scontent.fpnh24-1.fna&_nc_gid=HCNZygUrL1Oh-45xff1Fow&oh=00_AfQlKyCdk-hrndZugVuXAaPW4i0dJAOMA3Yid0NQqPXQHA&oe=6884532B" 
   });
 
-  const handleNavClick = (path) => {
-    navigate(path);
+  const [profileImage, setProfileImage] = useState(user.profileUrl || null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfileImage(file); // File object
+    }
+  };
+
+  const renderProfileImage = () => {
+    if (profileImage instanceof File) {
+      return URL.createObjectURL(profileImage);
+    } else if (typeof profileImage === "string") {
+      return profileImage;
+    }
+    return null;
   };
 
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row p-4 gap-6">
       {/* Sidebar */}
-      <aside className="w-full md:w-1/4 bg-gray-50 shadow rounded-lg p-6 space-y-6">
-        <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-full bg-green-500 text-white text-2xl font-semibold flex items-center justify-center">
-            C
-          </div>
-          <div>
-            <h2 className="font-semibold text-gray-800">{user.name}</h2>
-            <p className="text-sm text-blue-600">{user.email}</p>
-          </div>
-        </div>
-        <nav className="space-y-4">
-          <NavItem icon={ShoppingCart} label="My Order" path="/account/my-order" onClick={handleNavClick} />
-          <NavItem icon={TicketPercent} label="My Coupon" path="/account/coupon" onClick={handleNavClick} />
-          <NavItem icon={Heart} label="Favorite" path="/account/favorite" onClick={handleNavClick} />
-          <NavItem icon={Star} label="Refer A Friend" path="/account/refer" onClick={handleNavClick} />
-          <NavItem icon={User} label="Personal Information" path="/account/profile" onClick={handleNavClick} active />
-          <NavItem icon={Lock} label="Change Password" path="/account/change-password" onClick={handleNavClick} />
-          <NavItem icon={LogOut} label="Logout" path="/logout" onClick={handleNavClick} />
-        </nav>
-      </aside>
+      <Sidebar user={user} navigate={navigate} location={location} />
 
       {/* Form */}
       <main className="flex-1 bg-white rounded-lg p-6 shadow">
@@ -60,16 +52,37 @@ const ProfilePage = () => {
           Personal Information
         </h1>
 
+        {/* Avatar Box */}
         <div className="bg-blue-50 rounded-lg p-4 flex items-center gap-6 mb-6">
-          <div className="w-16 h-16 rounded-full bg-green-500 text-white text-3xl font-semibold flex items-center justify-center">
-            C
-          </div>
+          <label htmlFor="avatar-upload" className="cursor-pointer">
+            {renderProfileImage() ? (
+              <img
+                src={renderProfileImage()}
+                alt="Profile"
+                className="w-16 h-16 rounded-full object-cover"
+              />
+            ) : (
+              <div className="w-16 h-16 rounded-full bg-green-500 text-white text-3xl font-semibold flex items-center justify-center">
+                {user.name.charAt(0)}
+              </div>
+            )}
+          </label>
           <div>
-            <button className="text-sm bg-white px-4 py-1 rounded shadow hover:bg-gray-100 transition">
+            <input
+              id="avatar-upload"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageChange}
+            />
+            <label
+              htmlFor="avatar-upload"
+              className="text-sm bg-white px-4 py-1 rounded shadow hover:bg-gray-100 transition cursor-pointer inline-block"
+            >
               🔁 Change avatar
-            </button>
+            </label>
             <p className="text-xs text-gray-500 mt-1">
-              Upload JPG, PNG image required.
+              Upload JPG, PNG image or use a URL.
             </p>
           </div>
         </div>
@@ -155,19 +168,5 @@ const ProfilePage = () => {
     </div>
   );
 };
-
-const NavItem = ({ icon: Icon, label, active, path, onClick }) => (
-  <div
-    onClick={() => onClick(path)}
-    className={`flex items-center gap-3 p-2 rounded cursor-pointer ${
-      active
-        ? "text-blue-700 font-medium bg-blue-100"
-        : "text-gray-700 hover:bg-gray-100"
-    }`}
-  >
-    <Icon className="w-5 h-5" />
-    <span>{label}</span>
-  </div>
-);
 
 export default ProfilePage;
