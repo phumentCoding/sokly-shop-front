@@ -197,7 +197,7 @@ const Navbar = () => {
                 >
                   {/* Profile Image */}
                   <img
-                    src="https://scontent.fpnh24-1.fna.fbcdn.net/v/t39.30808-1/456268015_1066171398355955_6754295906527611875_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=104&ccb=1-7&_nc_sid=e99d92&_nc_ohc=mqkhLa22xjUQ7kNvwGC-qMp&_nc_oc=AdlhImvxjlJo3238Gb50iusK6f4Aw6FNpq9kGDdUEPxdcPO4zsvSBC2iPjBTvM5Blv4&_nc_zt=24&_nc_ht=scontent.fpnh24-1.fna&_nc_gid=HCNZygUrL1Oh-45xff1Fow&oh=00_AfQlKyCdk-hrndZugVuXAaPW4i0dJAOMA3Yid0NQqPXQHA&oe=6884532B" // Replace with the actual path to your image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Zv4DbL3EhQKJhsG3tKFkFp7U4VxZqa.png?stp=dst-jpg_s200x200_tt6&_nc_cat=104&ccb=1-7&_nc_sid=e99d92&_nc_ohc=mqkhLa22xjUQ7kNvwGC-qMp&_nc_oc=AdlhImvxjlJo3238Gb50iusK6f4Aw6FNpq9kGDdUEPxdcPO4zsvSBC2iPjBTvM5Blv4&_nc_zt=24&_nc_ht=scontent.fpnh24-1.fna&_nc_gid=HCNZygUrL1Oh-45xff1Fow&oh=00_AfQlKyCdk-hrndZugVuXAaPW4i0dJAOMA3Yid0NQqPXQHA&oe=6884532B" // Replace with the actual path to your image
                     alt="User Avatar"
                     className="w-12 h-12 rounded-full object-cover border border-gray-300"
                   />
@@ -205,7 +205,7 @@ const Navbar = () => {
                   {/* Text Info */}
                   <div className="text-sm">
                     <div className="font-medium">Welcome</div>
-                    <div className="text-gray-500">Yang Chanthorony</div>
+                    <div className="text-gray-500">Phal Raksa</div>
                   </div>
                 </div>
 
