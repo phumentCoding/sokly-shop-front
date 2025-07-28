@@ -8,7 +8,7 @@ import {
   Star,
   Lock,
   LogOut,
-  Percent, // ✅ MISSING ICON FIXED HERE
+  Percent,
 } from "lucide-react";
 import Sidebar from "./Sidebar";
 
@@ -35,12 +35,13 @@ const ReferFriend = () => {
   const user = {
     name: "Chanthrony Yang",
     email: "tonyja2460@gmail.com",
+    profileUrl:
+      "https://scontent.fpnh24-1.fna.fbcdn.net/v/t39.30808-1/456268015_1066171398355955_6754295906527611875_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=104&ccb=1-7&_nc_sid=e99d92&_nc_ohc=mqkhLa22xjUQ7kNvwGC-qMp&_nc_oc=AdlhImvxjlJo3238Gb50iusK6f4Aw6FNpq9kGDdUEPxdcPO4zsvSBC2iPjBTvM5Blv4&_nc_zt=24&_nc_ht=scontent.fpnh24-1.fna&_nc_gid=HCNZygUrL1Oh-45xff1Fow&oh=00_AfQlKyCdk-hrndZugVuXAaPW4i0dJAOMA3Yid0NQqPXQHA&oe=6884532B",
   };
 
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row p-4 gap-6">
-      {/* Sidebar */}
-      <Sidebar user={user} navigate={navigate} location={location} />
+      
 
       {/* Refer a Friend Content */}
       <div className="flex-1">
@@ -57,7 +58,7 @@ const ReferFriend = () => {
         </div>
 
         {/* Steps */}
-        <div className="space-y-4 mb-8 max-w-md mx-auto">
+        <div className="space-y-4 mb-8 max-w-md mx-96 ">
           {[
             "Share invite link to your friend",
             "Friend sign up, and make purchase",

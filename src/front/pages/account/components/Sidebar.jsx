@@ -1,4 +1,4 @@
-import React from "react";
+// Sidebar.jsx
 import {
   User,
   ShoppingCart,
@@ -12,9 +12,9 @@ import {
 const NavItem = ({ icon: Icon, label, path, onClick, active }) => (
   <div
     onClick={() => onClick(path)}
-    className={`flex items-center gap-3 p-2 rounded cursor-pointer ${
+    className={`flex items-center gap-3 p-2 rounded cursor-pointer transition ${
       active
-        ? "text-blue-700 font-medium bg-blue-100"
+        ? "text-blue-700 font-semibold bg-blue-100"
         : "text-gray-700 hover:bg-gray-100"
     }`}
   >
@@ -24,14 +24,16 @@ const NavItem = ({ icon: Icon, label, path, onClick, active }) => (
 );
 
 const Sidebar = ({ user, navigate, location }) => {
+  const isActive = (target) => location.pathname.startsWith(target);
+
   return (
     <aside className="w-full md:w-1/4 bg-gray-50 shadow rounded-lg p-6 space-y-6">
-      {/* Profile Section */}
+      {/* Profile Info */}
       <div className="flex items-center gap-4">
         <img
-          src="https://scontent.fpnh24-1.fna.fbcdn.net/v/t39.30808-1/456268015_1066171398355955_6754295906527611875_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=104&ccb=1-7&_nc_sid=e99d92&_nc_ohc=mqkhLa22xjUQ7kNvwGC-qMp&_nc_oc=AdlhImvxjlJo3238Gb50iusK6f4Aw6FNpq9kGDdUEPxdcPO4zsvSBC2iPjBTvM5Blv4&_nc_zt=24&_nc_ht=scontent.fpnh24-1.fna&_nc_gid=HCNZygUrL1Oh-45xff1Fow&oh=00_AfQlKyCdk-hrndZugVuXAaPW4i0dJAOMA3Yid0NQqPXQHA&oe=6884532B"
+          src={user.profileUrl}
           alt={user.name}
-          className="w-16 h-16 rounded-full object-cover ring-2 ring-blue-500 hover:scale-105 transition-transform"
+          className="w-16 h-16 rounded-full object-cover ring-2 ring-blue-500"
         />
         <div>
           <h2 className="font-semibold text-gray-800">{user.name}</h2>
@@ -39,55 +41,56 @@ const Sidebar = ({ user, navigate, location }) => {
         </div>
       </div>
 
-      {/* Navigation Items */}
+      {/* Nav Items */}
       <nav className="space-y-4">
         <NavItem
-          icon={ShoppingCart}
-          label="My Order"
-          path="/account/my-order"
+          icon={User}
+          label="Profile Info"
+          path="/account/profile"
           onClick={navigate}
-          active={location.pathname === "/account/my-order"}
-        />
-        <NavItem
-          icon={TicketPercent}
-          label="My Coupon"
-          path="/account/coupon"
-          onClick={navigate}
-          active={location.pathname === "/account/coupon"}
+          active={isActive("/account/profile")}
         />
         <NavItem
           icon={Heart}
           label="Favorite"
-          path="/account/favorite"
+          path="/account/profile/favorites"
           onClick={navigate}
-          active={location.pathname === "/account/favorite"}
+          active={isActive("/account/profile/favorites")}
+        />
+        <NavItem
+          icon={TicketPercent}
+          label="My Coupon"
+          path="/account/profile/coupon"
+          onClick={navigate}
+          active={isActive("/account/profile/coupon")}
+        />
+        <NavItem
+          icon={ShoppingCart}
+          label="My Orders"
+          path="/account/profile/orders"
+          onClick={navigate}
+          active={isActive("/account/profile/orders")}
         />
         <NavItem
           icon={Star}
-          label="Refer A Friend"
-          path="/account/refer"
+          label="Refer a Friend"
+          path="/account/profile/refer"
           onClick={navigate}
-          active={location.pathname === "/account/refer"}
-        />
-        <NavItem
-          icon={User}
-          label="Personal Information"
-          path="/account/profile"
-          onClick={navigate}
-          active={location.pathname === "/account/profile"}
+          active={isActive("/account/profile/refer")}
         />
         <NavItem
           icon={Lock}
           label="Change Password"
-          path="/account/change-password"
+          path="/account/profile/change-password"
           onClick={navigate}
-          active={location.pathname === "/account/change-password"}
+          active={isActive("/account/profile/change-password")}
         />
         <NavItem
           icon={LogOut}
           label="Logout"
           path="/logout"
           onClick={navigate}
+          active={isActive("/logout")}
         />
       </nav>
     </aside>
