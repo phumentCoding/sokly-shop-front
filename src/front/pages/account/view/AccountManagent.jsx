@@ -48,6 +48,7 @@ const ProfilePage = () => {
 
       {/* Form */}
       <main className="flex-1 bg-white rounded-lg p-6 shadow">
+        
         <h1 className="text-2xl font-semibold text-blue-800 mb-6">
           Personal Information
         </h1>
