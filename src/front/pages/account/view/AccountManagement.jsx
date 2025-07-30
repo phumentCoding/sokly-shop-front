@@ -1,39 +1,38 @@
 "use client"
-
-import { useState } from "react"
+import { Outlet, useLocation } from "react-router-dom"
 import Sidebar from "../components/Sidebar"
-import MyOrder from "../components/MyOrder"
-import MyCoupon from "../components/MyCoupon"
-import Favorite from "../components/Favorite"
-import ReferFriend from "../components/ReferFriend"
 
 const AccountManagement = () => {
-  const [activeItem, setActiveItem] = useState("my-order")
+  const location = useLocation()
 
-  const renderContent = () => {
-    switch (activeItem) {
-      case "my-order":
-        return <MyOrder />
-      case "my-coupon":
-        return <MyCoupon />
-      case "favorite":
-        return <Favorite />
-      case "refer-friend":
-        return <ReferFriend />
-      case "logout":
-        // Handle logout logic here
-        console.log("Logging out...")
-        return <MyOrder />
+  // Get active item from current route
+  const getActiveItem = () => {
+    const path = location.pathname.split("/").pop()
+    switch (path) {
+      case "favorites":
+        return "favorite"
+      case "profile":
+        return "personal-info"
+      case "mycoupon":
+        return "my-coupon"
+      case "changepassword":
+        return "change-password"
+      case "referfriend":
+        return "refer-friend"
+      case "myorder":
+        return "my-order"
       default:
-        return <MyOrder />
+        return "my-order"
     }
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-      <div className="flex w-[80%] h-[80vh] bg-gray-50 rounded-lg shadow-lg overflow-hidden">
-        <Sidebar activeItem={activeItem} onItemClick={setActiveItem} />
-        {renderContent()}
+    <div className="flex justify-center items-start min-h-screen bg-gray-100 p-4">
+      <div className="flex w-[80%] min-h-[80vh] bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+        <Sidebar activeItem={getActiveItem()} />
+        <div className="flex-1 overflow-y-auto">
+          <Outlet />
+        </div>
       </div>
     </div>
   )

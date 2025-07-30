@@ -3,7 +3,7 @@ import Master from "../layout/Master";
 import HomePage from "../pages/HomePage";
 import ProductDetail from "../pages/productDetail/view/ProductDetail";
 import Product from "../pages/produtsPage/view/Product";
-import AccountManagement from "../pages/account/view/AccountManagement";
+import AccountRoutes from "../pages/account/routes";
 
 const FrontRoutes = () => {
     return (
@@ -12,7 +12,7 @@ const FrontRoutes = () => {
                <Route index element={<HomePage/>}/>
                <Route path="/product/:slug" element={<ProductDetail/>}/>
                <Route path="/product/show/:category" element={<Product/>}/>
-            <Route path="/account/profile" element={<AccountManagement/>}/>
+            <Route path="/account/*" element={<AccountRoutes/>}/>
             </Route>
         </Routes>
     )

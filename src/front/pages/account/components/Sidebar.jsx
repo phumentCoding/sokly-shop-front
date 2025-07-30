@@ -1,6 +1,38 @@
 "use client"
+import { useNavigate } from "react-router-dom"
 
-const Sidebar = ({ activeItem, onItemClick }) => {
+const Sidebar = ({ activeItem }) => {
+  const navigate = useNavigate()
+
+  const handleItemClick = (itemId) => {
+    switch (itemId) {
+      case "my-order":
+        navigate("/account/myorder")
+        break
+      case "my-coupon":
+        navigate("/account/mycoupon")
+        break
+      case "favorite":
+        navigate("/account/favorites")
+        break
+      case "refer-friend":
+        navigate("/account/referfriend")
+        break
+      case "personal-info":
+        navigate("/account/profile")
+        break
+      case "change-password":
+        navigate("/account/changepassword")
+        break
+      case "logout":
+        console.log("Logging out...")
+        navigate("/")
+        break
+      default:
+        navigate("/account/myorder")
+    }
+  }
+
   const menuItems = [
     {
       id: "my-order",
@@ -132,7 +164,7 @@ const Sidebar = ({ activeItem, onItemClick }) => {
               className={`w-full flex items-center justify-start h-12 px-4 rounded-md transition-colors ${
                 isActive ? "bg-blue-600 text-white hover:bg-blue-700" : "text-gray-600 hover:bg-gray-100"
               }`}
-              onClick={() => onItemClick(item.id)}
+              onClick={() => handleItemClick(item.id)}
             >
               <span className="mr-3">{item.icon}</span>
               {item.label}
