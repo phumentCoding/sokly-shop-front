@@ -1,4 +1,3 @@
-// Sidebar.jsx
 import {
   User,
   ShoppingCart,
@@ -8,47 +7,65 @@ import {
   Lock,
   LogOut,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const NavItem = ({ icon: Icon, label, path, onClick, active }) => (
   <div
     onClick={() => onClick(path)}
-    className={`flex items-center gap-3 p-2 rounded cursor-pointer transition ${
-      active
-        ? "text-blue-700 font-semibold bg-blue-100"
-        : "text-gray-700 hover:bg-gray-100"
-    }`}
+    className={`flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer transition-all group
+      ${active ? "bg-blue-100 text-blue-700 font-semibold" : "text-gray-700 hover:bg-gray-100"}
+    `}
   >
-    <Icon className="w-5 h-5" />
+    <Icon
+      className={`w-5 h-5 transition-all group-hover:text-blue-600 ${
+        active ? "text-blue-700" : "text-gray-500"
+      }`}
+    />
     <span>{label}</span>
   </div>
 );
 
 const Sidebar = ({ user, navigate, location }) => {
+  const [avatar, setAvatar] = useState(user.profileUrl);
+
+  // Load avatar from localStorage on mount
+  useEffect(() => {
+    const storedAvatar = localStorage.getItem("profile-avatar");
+    if (storedAvatar) {
+      setAvatar(storedAvatar);
+    }
+  }, []);
+
   const isActive = (target) => location.pathname.startsWith(target);
 
   return (
-    <aside className="w-full md:w-1/4 bg-gray-50 shadow rounded-lg p-6 space-y-6">
-      {/* Profile Info */}
-      <div className="flex items-center gap-4">
-        <img
-          src={user.profileUrl}
-          alt={user.name}
-          className="w-16 h-16 rounded-full object-cover ring-2 ring-blue-500"
-        />
-        <div>
-          <h2 className="font-semibold text-gray-800">{user.name}</h2>
-          <p className="text-sm text-blue-600">{user.email}</p>
+    <aside className="w-full md:w-64 bg-white border-r border-gray-200 h-full shadow-sm">
+      {/* Header */}
+      <div className="p-6 border-b border-gray-100">
+        <div className="flex items-center gap-4">
+          <img
+            src={
+              avatar ||
+              "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.name)
+            }
+            alt={user.name}
+            className="w-16 h-16 rounded-full object-cover ring-2 ring-blue-500"
+          />
+          <div>
+            <h2 className="text-lg font-semibold text-gray-800">{user.name}</h2>
+            <p className="text-sm text-blue-600">{user.email}</p>
+          </div>
         </div>
       </div>
 
-      {/* Nav Items */}
-      <nav className="space-y-4">
+      {/* Nav Section */}
+      <nav className="p-4 space-y-2">
         <NavItem
           icon={User}
           label="Profile Info"
           path="/account/profile"
           onClick={navigate}
-          active={isActive("/account/profile")}
+          active={isActive("/account/profile") && location.pathname === "/account/profile"}
         />
         <NavItem
           icon={Heart}
@@ -85,14 +102,21 @@ const Sidebar = ({ user, navigate, location }) => {
           onClick={navigate}
           active={isActive("/account/profile/change-password")}
         />
+      </nav>
+
+      {/* Footer */}
+      <div className="p-4 mt-auto border-t border-gray-100">
         <NavItem
           icon={LogOut}
           label="Logout"
           path="/logout"
-          onClick={navigate}
+          onClick={() => {
+            localStorage.removeItem("profile-avatar"); // Clear avatar on logout
+            navigate("/logout");
+          }}
           active={isActive("/logout")}
         />
-      </nav>
+      </div>
     </aside>
   );
 };

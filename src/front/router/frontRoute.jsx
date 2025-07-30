@@ -7,6 +7,7 @@ import AccountManagement from "../pages/account/view/AccountManagent";
 import Contact from "../pages/contact";
 import News from "../pages/news";
 import PreOrder from "../pages/preorder";
+import AccountRoutes from "../pages/account/route";
 
 const FrontRoutes = () => {
   return (
@@ -15,7 +16,7 @@ const FrontRoutes = () => {
         <Route index element={<HomePage />} />
         <Route path="product/:slug" element={<ProductDetail />} />
         <Route path="product/show/:category" element={<Product />} />
-        <Route path="account/profile/:tab?" element={<AccountManagement />} />
+        <Route path="account/*" element={<AccountRoutes />} />
         <Route path="contact" element={<Contact />} />
         <Route path="news" element={<News />} />
         <Route path="preOrder" element={<PreOrder />} />
