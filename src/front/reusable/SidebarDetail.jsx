@@ -21,7 +21,7 @@ const SidebarDetail = () => {
           ))}
         </ol>
         <div className="mt-5 border-t pt-3 text-sm text-gray-600 space-y-1">
-          <p>សូមអរគុណសម្រាប់ការជឿទុកចិត្តលើហាងរបស់យើង។</p>
+          <p>សូមអរគុណសម្រាប់ការជឿទុកចិត្តលើហាងរបស់យើង។។</p>
           <p className="text-blue-600 font-medium">*Cambodian only (Bank Policy)!</p>
         </div>
       </section>

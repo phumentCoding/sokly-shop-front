@@ -7,32 +7,32 @@ const couponData = [
   {
     title: "Welcome to Sokly Website",
     amount: "$5 OFF",
-    expiredDate: "14, Aug 2022",
+    expiredDate: "2022-08-14",
   },
   {
     title: "Refer Friend Offer",
     amount: "$10 OFF",
-    expiredDate: "04, Apr 2024",
+    expiredDate: "2024-04-04",
   },
   {
     title: "Refer Friend Offer",
     amount: "$10 OFF",
-    expiredDate: "10, Aug 2023",
+    expiredDate: "2023-08-10",
   },
   {
     title: "Welcome to Sokly Website",
     amount: "$5 OFF",
-    expiredDate: "14, Aug 2022",
+    expiredDate: "2022-08-14",
   },
   {
     title: "Refer Friend Offer",
     amount: "$10 OFF",
-    expiredDate: "02, Jul 2023",
+    expiredDate: "2023-07-02",
   },
   {
     title: "Refer Friend Offer",
     amount: "$10 OFF",
-    expiredDate: "24, Nov 2023",
+    expiredDate: "2023-11-24",
   },
 ];
 
@@ -45,7 +45,9 @@ const CouponCard = ({ title, amount, expiredDate }) => (
     </div>
     <div className="flex-1 px-4 py-3 flex flex-col justify-center">
       <h3 className="font-semibold text-white">{title}</h3>
-      <p className="text-sm text-white mt-1">Expired on {expiredDate}</p>
+      <p className="text-sm text-white mt-1">
+        Expired on {new Date(expiredDate).toDateString()}
+      </p>
     </div>
     <div className="flex items-center px-4 text-right">
       <p className="text-white font-bold">{amount}</p>
@@ -61,11 +63,21 @@ const MyCoupon = () => {
   const user = {
     name: "Chanthrony Yang",
     email: "tonyja2460@gmail.com",
+    profileUrl:
+      "https://scontent.fpnh24-1.fna.fbcdn.net/v/t39.30808-1/456268015_1066171398355955_6754295906527611875_n.jpg?...",
   };
+
+  const today = new Date();
+  const availableCoupons = couponData.filter(
+    (coupon) => new Date(coupon.expiredDate) >= today
+  );
+  const pastCoupons = couponData.filter(
+    (coupon) => new Date(coupon.expiredDate) < today
+  );
 
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row p-4 gap-6">
-      <Sidebar user={user} navigate={navigate} location={location} />
+      
 
       {/* Coupon Content */}
       <div className="flex-1">
@@ -98,10 +110,25 @@ const MyCoupon = () => {
 
         <div className="border border-gray-200 rounded-md p-6 bg-white">
           {activeTab === "available" ? (
-            <p className="text-gray-500">No available coupons</p>
+            availableCoupons.length === 0 ? (
+              <p className="text-gray-500">No available coupons</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {availableCoupons.map((coupon, index) => (
+                  <CouponCard
+                    key={index}
+                    title={coupon.title}
+                    amount={coupon.amount}
+                    expiredDate={coupon.expiredDate}
+                  />
+                ))}
+              </div>
+            )
+          ) : pastCoupons.length === 0 ? (
+            <p className="text-gray-500">No past coupons</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {couponData.map((coupon, index) => (
+              {pastCoupons.map((coupon, index) => (
                 <CouponCard
                   key={index}
                   title={coupon.title}
