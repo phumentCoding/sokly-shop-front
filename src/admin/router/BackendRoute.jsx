@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Master from '../layout/Master'
-import Dashboard from '../Dashboard '
+import Dashboard from '../pages/dashboard/view/Dashboard '
 
 const BackendRoute = () => {
   return (

@@ -7,10 +7,7 @@ import {
   LineChart,
   ArrowRight,
 } from "lucide-react";
-import Sidebar from "./layout/Sidebar";
-
-
-
+import Sidebar from "../../../layout/Sidebar";
 const Dashboard = () => {
   return (
     <div className="flex">

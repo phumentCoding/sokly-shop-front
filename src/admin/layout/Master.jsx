@@ -1,15 +1,12 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Dashboard from '../Dashboard '
+import Dashboard from '../pages/dashboard/view/Dashboard '
 
 
 const Master = () => {
   return (
     <div>
       <Outlet/>
-      <Dashboard/>
-  
-   
     </div>
   )
 }

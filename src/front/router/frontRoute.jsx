@@ -6,8 +6,8 @@ import Product from "../pages/produtsPage/view/Product";
 import AccountManagement from "../pages/account/view/AccountManagent";
 import Contact from "../pages/contact";
 import News from "../pages/news";
-import PreOrder from "../pages/preorder";
 import AccountRoutes from "../pages/account/route";
+import PreOrder from "../pages/productDetail/components/PreOrder";
 
 const FrontRoutes = () => {
   return (
