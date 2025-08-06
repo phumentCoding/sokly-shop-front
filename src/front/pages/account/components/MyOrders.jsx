@@ -28,7 +28,7 @@ const MyOrders = () => {
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row p-4 gap-6">
       {/* Sidebar */}
-        <Sidebar user={user} navigate={navigate} location={location} />
+       
 
       {/* Main Content */}
       <main className="flex-1 bg-white rounded-lg p-6 shadow overflow-auto">
