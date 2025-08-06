@@ -6,6 +6,7 @@ import Dashboard from '../pages/dashboard/view/Dashboard '
 const Master = () => {
   return (
     <div>
+      <Sidebar/>
       <Outlet/>
     </div>
   )

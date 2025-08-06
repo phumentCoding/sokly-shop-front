@@ -19,7 +19,7 @@ const AccountRoutes = () => {
         <Route path="profile/orders" element={<MyOrders />} />
         <Route path="profile/sidebar" element={<Sidebar />} />
         <Route path="profile/refer" element={<ReferFriend/>} />
-   
+
       </Route>
     </Routes>
   );

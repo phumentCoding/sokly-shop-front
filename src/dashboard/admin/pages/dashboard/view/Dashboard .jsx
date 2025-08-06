@@ -11,9 +11,6 @@ import Sidebar from "../../../layout/Sidebar";
 const Dashboard = () => {
   return (
     <div className="flex">
-      {/* Sidebar */}
-      <Sidebar/>
-
       {/* Main Content */}
       <div className="flex-1 bg-[#f8fbff] px-6 py-8">
         <div className="mb-8">

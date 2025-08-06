@@ -1,18 +1,17 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Master from '../layout/Master'
-import Dashboard from '../pages/dashboard/view/Dashboard '
-
-const BackendRoute = () => {
+import DashboardRouter from '../pages/dashboard/route/DashboardRouter'
+const AdminRouter = () => {
   return (
     <div>
       <Routes>
         <Route index element={<Master/>}>
-       
+           <Route path='/dashboard/*' element={<DashboardRouter/>}/> 
         </Route>
       </Routes>
     </div>
   )
 }
 
-export default BackendRoute
+export default AdminRouter
