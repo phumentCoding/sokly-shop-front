@@ -11,13 +11,12 @@ import {
 } from "lucide-react";
 
 const Sidebar = () => {
-  const activePath = "Profile Info";
-
+  const activePath = "Dashboard"; // This should be dynamically set based on the current route
   const menu = [
-    { icon: User, label: "Profile Info" },
-    { icon: Heart, label: "Favorite" },
-    { icon: TicketPercent, label: "My Coupon" },
-    { icon: ShoppingCart, label: "My Orders" },
+    { icon: User, label: "Dashboard" },
+    { icon: Heart, label: "Users" },
+    { icon: TicketPercent, label: "Products" },
+    { icon: ShoppingCart, label: "Orders" },
     { icon: Star, label: "Refer a Friend" },
     { icon: Lock, label: "Change Password" },
   ];

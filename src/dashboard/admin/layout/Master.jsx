@@ -1,6 +1,5 @@
-import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Sidebar from './Sidebar' // make sure path is correct
+import Sidebar from './Sidebar'
 
 const Master = () => {
   return (
