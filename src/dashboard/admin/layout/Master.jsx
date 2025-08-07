@@ -1,13 +1,18 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Dashboard from '../pages/dashboard/view/Dashboard '
-
+import Sidebar from './Sidebar' // make sure path is correct
 
 const Master = () => {
   return (
-    <div>
-      <Sidebar/>
-      <Outlet/>
+    <div className="flex min-h-screen bg-[#f8faff]">
+      {/* Sidebar */}
+      <div className="w-[260px] bg-white border-r border-gray-100">
+        <Sidebar />
+      </div>
+      {/* Main Content */}
+      <div className="flex-1 p-8">
+        <Outlet />
+      </div>
     </div>
   )
 }
