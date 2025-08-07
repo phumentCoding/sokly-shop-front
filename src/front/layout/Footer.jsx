@@ -30,7 +30,7 @@ const Footer = () => {
 
   const socialLinks = [
     {
-      name: "Sokly Phone Shop",
+      name: "Sokly Phone Shosp",
       platform: "Facebook",
       href: "https://facebook.com/soklyphoneshop",
       icon: (
