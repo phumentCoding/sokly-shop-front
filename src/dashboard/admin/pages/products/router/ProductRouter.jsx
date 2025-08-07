@@ -1,7 +1,5 @@
-import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import ProductList from '../view/ProductList'
-
 const ProductRouter = () => {
   return (
      <Routes>
