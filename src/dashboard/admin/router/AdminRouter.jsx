@@ -7,7 +7,7 @@ const AdminRouter = () => {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Master/>}>
+        <Route element={<Master/>}>
            <Route path='/dashboard/*' element={<DashboardRouter/>}/> 
            <Route path='/products/*' element={<ProductRouter/>}/> 
         </Route>

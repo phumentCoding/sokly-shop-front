@@ -12,7 +12,7 @@ import ReferFriend from "../components/ReferFriend";
 const AccountRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<AccountManagent />}>
+      <Route element={<AccountManagent />}>
         <Route path="profile" element={<Profile />} />
         <Route path="profile/favorites" element={<Favorite />} />
         <Route path="profile/coupon" element={<Coupon />} />
